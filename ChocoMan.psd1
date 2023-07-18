@@ -57,9 +57,9 @@
             # Tags applied to this module. These help with module discovery in online galleries.
             Tags       = @(
                 'Chocolatey',
-                'Package Manager',
-                'Package Management',
-                'Package Manager for Windows'
+                'Package',
+                'Management',
+                'Windows'
             )
 
             # A URL to the license for this module.
