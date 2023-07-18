@@ -12,7 +12,7 @@ Function Get-ChocoVersion {
     param()
 
     if (Test-ChocoInstalled) {
-        $ChocoVersion = (choco -v -limitoutput -nocolor)
+        $ChocoVersion = (choco -v -limitoutput --nocolor)
         Return $ChocoVersion
     }
 }

@@ -13,7 +13,7 @@ Function Get-ChocoSources {
     
     if (Test-ChocoInstalled) {
         $Header = "Name", "Uri", "Unknown0", "UserName", "Unknown1", "BypassProxy", "SelfService", "AdminOnly"
-        $ChocoPackages = ConvertFrom-Csv (choco source list -r -nocolor) -Delimiter '|' -Header $Header
+        $ChocoPackages = ConvertFrom-Csv (choco source list -r --nocolor) -Delimiter '|' -Header $Header
         Return $ChocoPackages | Select-Object Name, Uri, Username, BypassProxy, SelfService, AdminOnly
     }
 }
