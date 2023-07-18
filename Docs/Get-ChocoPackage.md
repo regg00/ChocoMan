@@ -21,12 +21,13 @@ Get a specific locally installed chocolatey package.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-ChocoPackage -Name vlc
+Name Version
+---- -------
+vlc  3.0.18
+```
 
 ## PARAMETERS
 

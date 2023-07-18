@@ -21,12 +21,14 @@ Get the list of outdated chocolatey packages.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-ChocoOutdated
+Name             CurrentVersion AvailableVersion Pinned
+----             -------------- ---------------- ------
+adobereader      2023.3.20201.1 2023.003.20215   false
+github-desktop   3.2.3          3.2.6            false
+```
 
 ## PARAMETERS
 

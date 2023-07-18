@@ -4,6 +4,12 @@ Function Get-ChocoSources {
         Get the list of chocolatey sources.
     .DESCRIPTION
         Get the list of chocolatey sources.
+    .EXAMPLE
+        Get-ChocoSources
+        Name                Uri                                                 UserName     BypassProxy SelfService AdminOnly
+        ----                ---                                                 --------     ----------- ----------- ---------        
+        chocolatey          https://community.chocolatey.org/api/v2/                         0           False       False
+                
     .OUTPUTS
         PSCustomObject
     #>

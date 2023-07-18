@@ -4,6 +4,9 @@ Function Get-ChocoVersion {
         Get the version of chocolatey.
     .DESCRIPTION    
         Get the version of chocolatey.
+    .EXAMPLE
+        Get-ChocoVersion
+        2.1.0
     .OUTPUTS
         String
     #>

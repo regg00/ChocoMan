@@ -21,12 +21,14 @@ Get the list of all installed chocolatey packages.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-ChocoPackages
+Name             Version
+----             -------        
+github-desktop   3.2.3
+vlc              3.0.18
+```
 
 ## PARAMETERS
 

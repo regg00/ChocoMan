@@ -4,6 +4,12 @@ Function Get-ChocoPackage {
         Get a specific locally installed chocolatey package.
     .DESCRIPTION    
         Get a specific locally installed chocolatey package.
+    .EXAMPLE
+        Get-ChocoPackage -Name vlc
+        Name Version
+        ---- -------
+        vlc  3.0.18
+
     .OUTPUTS
         PSCustomObject
     #>

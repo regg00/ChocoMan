@@ -21,12 +21,13 @@ Get the list of chocolatey sources.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-ChocoSources
+Name                Uri                                                 UserName     BypassProxy SelfService AdminOnly
+----                ---                                                 --------     ----------- ----------- ---------        
+chocolatey          https://community.chocolatey.org/api/v2/                         0           False       False
+```
 
 ## PARAMETERS
 

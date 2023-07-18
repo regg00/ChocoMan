@@ -21,12 +21,11 @@ Get the version of chocolatey.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-ChocoVersion
+2.1.0
+```
 
 ## PARAMETERS
 
