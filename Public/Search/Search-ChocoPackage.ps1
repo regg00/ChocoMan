@@ -13,7 +13,6 @@ Function Search-ChocoPackage {
 
     .EXAMPLE
         Search-ChocoPackage -Name "vlc"
-
         Name                Version
         ----                -------
         vlc                 3.0.18
@@ -23,7 +22,6 @@ Function Search-ChocoPackage {
 
     .EXAMPLE
         Search-ChocoPackage -Name "vlc" -Source "chocolatey"
-
         Name                Version
         ----                -------
         vlc                 3.0.18
@@ -32,7 +30,6 @@ Function Search-ChocoPackage {
         vlc-nightly         4.0.0.20230713
     .EXAMPLE
         Search-ChocoPackage -Name "vlc" -Source "chocolatey" -Exact
-
         Name Version
         ---- -------
         vlc  3.0.18
