@@ -49,4 +49,4 @@ The following commands are available for packages:
 
 ## What else can I do?
 
-There is plenty of help to read. Get started [here](./docs/)
+There is plenty of help to read. Get started [here](./Docs/)
