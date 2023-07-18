@@ -8,7 +8,7 @@ Function Get-ChocoPackages {
         PSCustomObject
     #>
     [CmdletBinding()]
-    [OutputType([String])]
+    [OutputType([PSCustomObject])]
     param()
 
     if (Test-ChocoInstalled) {

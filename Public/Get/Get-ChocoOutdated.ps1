@@ -8,7 +8,7 @@ Function Get-ChocoOutdated {
         PSCustomObject
     #>
     [CmdletBinding()]
-    [OutputType([String])]
+    [OutputType([PSCustomObject])]
     param()
 
     if (Test-ChocoInstalled) {
