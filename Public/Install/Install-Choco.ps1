@@ -33,13 +33,12 @@ Function Install-Choco {
         [String] $InstallerUrl = 'https://chocolatey.org/install.ps1'
     )
 
-    if ((Test-ChocoInstalled)) {        
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString($InstallerUrl))
-        Write-Host "Chocolatey has been installed." -ForegroundColor Green
-
+    if (!(Test-ChocoInstalled)) {        
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString($InstallerUrl))        
+        return "Chocolatey has been installed."
     }
     else {
         $ChocoVersion = Get-ChocoVersion
-        Write-Host "Chocolatey is already installed. Version $ChocoVersion" -ForegroundColor Yellow
+        return "Chocolatey is already installed. Version $ChocoVersion"
     }
 }
