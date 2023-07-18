@@ -1,6 +1,6 @@
 ![Tests](https://github.com/regg00/ChocoMan/actions/workflows/run-tests.yaml/badge.svg)
 
-<img src="./Docs/logo.png" height="200">
+<img src="./Docs/icon.png" height="200">
 
 # ChocoMan
 

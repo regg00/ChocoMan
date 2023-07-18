@@ -76,7 +76,7 @@
             ProjectUri = 'https://github.com/regg00/ChocoMan'
 
             # A URL to an icon representing this module.
-            # IconUri = ''
+            IconUri    = 'https://raw.githubusercontent.com/regg00/ChocoMan/main/Docs/icon.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
