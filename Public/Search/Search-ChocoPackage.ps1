@@ -10,8 +10,35 @@ Function Search-ChocoPackage {
         Search on a specific source.
     .PARAMETER Exact
         Search for an exact match.
+
+    .EXAMPLE
+        Search-ChocoPackage -Name "vlc"
+
+        Name                Version
+        ----                -------
+        vlc                 3.0.18
+        vlc.install         3.0.18
+        vlc.portable        3.0.18
+        vlc-nightly         4.0.0.20230713
+
+    .EXAMPLE
+        Search-ChocoPackage -Name "vlc" -Source "chocolatey"
+
+        Name                Version
+        ----                -------
+        vlc                 3.0.18
+        vlc.install         3.0.18
+        vlc.portable        3.0.18
+        vlc-nightly         4.0.0.20230713
+    .EXAMPLE
+        Search-ChocoPackage -Name "vlc" -Source "chocolatey" -Exact
+
+        Name Version
+        ---- -------
+        vlc  3.0.18
     .OUTPUTS
         PSCustomObject
+    
     #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
