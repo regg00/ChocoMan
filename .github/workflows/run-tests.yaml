@@ -16,3 +16,17 @@ jobs:
         shell: pwsh
         run: |
           Invoke-Pester Tests\* -Passthru
+
+  publish:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Publish module
+        uses: natescherer/publish-powershell-action@v1.0.3
+        with:
+          token: ${{ secrets.PS_GALLERY_KEY }}
+          target: gallery
+          path: .
