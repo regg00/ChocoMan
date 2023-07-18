@@ -73,4 +73,8 @@ Describe 'Functional tests' {
     It 'Package "chocolatey" should be installed' {
         (Get-ChocoPackages | Where-Object { $_.Name -like 'chocolatey' }).Name | Should -Be 'chocolatey'
     }
+
+    It 'Source "chocolatey" should be available' {
+        (Get-ChocoSources | Where-Object { $_.Name -eq 'chocolatey' }).Name | Should -Be 'chocolatey'
+    }
 }
