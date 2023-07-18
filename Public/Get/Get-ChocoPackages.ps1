@@ -20,7 +20,7 @@ Function Get-ChocoPackages {
 
     if (Test-ChocoInstalled) {
         $Header = "Name", "Version"
-        $ChocoPackages = ConvertFrom-Csv (choco list -lo -r --nocolor) -Delimiter '|' -Header $Header
+        $ChocoPackages = ConvertFrom-Csv (choco list -r --nocolor) -Delimiter '|' -Header $Header
         Return $ChocoPackages
     }
 
