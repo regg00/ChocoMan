@@ -1,9 +1,9 @@
 Function Get-ChocoPackages {
     <#
     .SYNOPSIS
-        Get the list of installed chocolatey packages.
+        Get the list of all installed chocolatey packages.
     .DESCRIPTION    
-        Get the list of installed chocolatey packages.
+        Get the list of all installed chocolatey packages.
     .OUTPUTS
         PSCustomObject
     #>

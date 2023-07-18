@@ -63,3 +63,14 @@ Describe 'Module ChocoMan loads' {
         Get-Module -Name 'ChocoMan' | Should -Not -Be $null
     }
 }
+
+Describe 'Functional tests' {
+    It 'Return only the version number' {
+        $Versions = @('2.1.0', '2.0.0', '1.4.0', '1.3.1' )
+        Get-ChocoVersion | Should -BeIn $Versions
+    }
+
+    It 'Package "chocolatey" should be installed' {
+        (Get-ChocoPackages | Where-Object { $_.Name -like 'chocolatey' }).Name | Should -Be 'chocolatey'
+    }
+}
