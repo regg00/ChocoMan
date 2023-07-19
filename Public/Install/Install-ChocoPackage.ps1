@@ -1,9 +1,9 @@
 Function Install-ChocoPackage {
     <#
     .SYNOPSIS
-        Installs a chocolatey package.        
+        Installs a chocolatey package. Just like Chocolatey, you may need admin rights to install a package.
     .DESCRIPTION    
-        Installs a chocolatey package with the option to upgrade it. By default, no confirmation is asked.
+        Installs a chocolatey package. Just like Chocolatey, you may need admin rights to install a package.
     .PARAMETER Name
         The name of the package to install.
     .PARAMETER Source
