@@ -12,7 +12,7 @@
     RootModule        = '.\ChocoMan.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.0.1'
+    ModuleVersion     = '0.0.2'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -24,7 +24,7 @@
     Author            = 'regg00'
 
     # Company or vendor of this module
-    CompanyName       = 'Unknown'
+    CompanyName       = 'RLConsulting'
 
     # Copyright statement for this module
     Copyright         = '(c) regg00. All rights reserved.'
