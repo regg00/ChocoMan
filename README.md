@@ -38,14 +38,18 @@ Chocolatey v2.1.0 installed
 
 First things first, you need to import it `Import-Module ChocoMan`
 
-### Packages
+### Functions available
 
-The following commands are available for packages:
+The following commands are available:
 
-| Command           | Status | Notes                                                |
-| ----------------- | ------ | ---------------------------------------------------- |
-| Get-ChocoPackages | Tested | Get the list of all installed chocolatey packages.   |
-| Get-ChocoPackage  | Tested | Get a specific locally installed chocolatey package. |
+| Command                                              | Status             | Notes                                                |
+| ---------------------------------------------------- | ------------------ | ---------------------------------------------------- |
+| [Get-ChocoOutdated](./Docs/Get-ChocoOutdated.md)     | :white_check_mark: | Get the list of outdated chocolatey packages.        |
+| [Get-ChocoPackage](./Docs/Get-ChocoPackage.md)       | Tested             | Get a specific locally installed chocolatey package. |
+| [Get-ChocoPackages](./Docs/Get-ChocoPackages.md)     | Tested             | Get the list of all installed chocolatey packages.   |
+| [Get-ChocoSources](./Docs/Get-ChocoSources.md)       | Tested             | Get the list of chocolatey sources.                  |
+| [Get-ChocoVersion](./Docs/Get-ChocoVersion.md)       | Tested             | Get the version of chocolatey.                       |
+| [Search-ChocoPackage](./Docs/Search-ChocoPackage.md) | Tested             | Search for a chocolatey package.                     |
 
 ## What else can I do?
 
