@@ -6,6 +6,10 @@
 
 A PowerShell wrapper around Chocolatey.
 
+## Why it exists
+
+Mostly for fun, but I also got tired of parsing raw output of Chocolatey commands in my deployment scripts. I figured having each command outputs a standardized PowerShell object would help somehow.
+
 ## Installing this module
 
 This module is available in [PowerShell Gallery](https://www.powershellgallery.com/packages/PSPsat):
@@ -50,7 +54,7 @@ The following commands are available:
 | [Get-ChocoSources](./Docs/Get-ChocoSources.md)         | :white_check_mark: | Get the list of chocolatey sources.                  |
 | [Get-ChocoVersion](./Docs/Get-ChocoVersion.md)         | :white_check_mark: | Get the version of chocolatey.                       |
 | [Search-ChocoPackage](./Docs/Search-ChocoPackage.md)   | :white_check_mark: | Search for a chocolatey package.                     |
-| [Install-ChocoPackage](./Docs/Install-ChocoPackage.md) | :test_tube:        | Search for a chocolatey package.                     |
+| [Install-ChocoPackage](./Docs/Install-ChocoPackage.md) | :lab_coat:         | Search for a chocolatey package.                     |
 
 ## What else can I do?
 
