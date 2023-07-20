@@ -56,7 +56,8 @@ The following commands are available:
 | [Search-ChocoPackage](./Docs/Search-ChocoPackage.md)   | :white_check_mark: | Search for a chocolatey package.                                                   |
 | [Install-ChocoPackage](./Docs/Install-ChocoPackage.md) | :lab_coat:         | Install chocolatey.                                                                |
 | Get-ChocoApiKey                                        | :white_check_mark: | Retrieves, saves or deletes an API key for a particular source                     |
-| Set-ChocoApiKey                                        | :soon:             | Retrieves API keys                                                                 |
+| Set-ChocoApiKey                                        | :white_check_mark: | Edit API keys                                                                      |
+| Add-ChocoApiKey                                        | :white_check_mark: | Adds a new API. Aliases to Set-ChocoApiKey. keuy                                   |
 | New-ChocoPackage                                       | :soon:             | Generates files necessary for a chocolatey package from a template                 |
 | Build-ChocoPackage                                     | :soon:             | Packages nuspec, scripts, and other Chocolatey package resources into a nupkg file |
 | Publish-ChocoPackage                                   | :soon:             | Pushes a compiled nupkg to a source                                                |

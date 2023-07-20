@@ -11,3 +11,7 @@ foreach ($Function in @($Functions)) {
         Write-Error -Message "Failed to import function $($Function.FullName): $_"
     }
 }
+
+New-Alias -Name 'Add-ChocoApiKey' -Value 'Set-ChocoApiKey'
+
+Export-ModuleMember -Function $Functions.BaseName -Alias *
