@@ -64,12 +64,28 @@ Describe 'Module ChocoMan loads' {
     }
 }
 
-Describe 'Functional tests' {
-    It 'Return only the version number' {
-        $Versions = @('2.1.0', '2.0.0', '1.4.0', '1.3.1' )
-        Get-ChocoVersion | Should -BeIn $Versions
+Describe 'ApiKey' {
+    It 'Should return a valid API key' {
+        { Get-ChocoApiKey } | Should -Not -Throw       
+    }
+    It 'Should add a new Api Key' {
+        (Add-ChocoApiKey -Source 'https://google.com' -ApiKey '1234567890').Status | Should -Be "Added API key"
+    }
+}
+
+Describe 'Configuration' {
+    It 'Should return a valid configuration' {
+        Get-ChocoConfig | Should -Not -BeNullOrEmpty
+    }
+    It 'Should return a valid feature set' {
+        Get-ChocoFeature | Should -Not -BeNullOrEmpty
     }
 
+}
+Describe 'Install' {
+
+}
+Describe 'Packages' {
     It 'Package "chocolatey" should be installed' {
         (Get-ChocoPackage -Name chocolatey).Name | Should -Be "chocolatey"
     }
@@ -78,6 +94,8 @@ Describe 'Functional tests' {
         (Get-ChocoPackage).Length | Should -BeGreaterThan 1
     }
 
+}
+Describe 'Sources' {
     It 'Source "chocolatey" should be available' {
         (Get-ChocoSource -Name chocolatey).Name | Should -Be 'chocolatey'
     }
@@ -85,4 +103,23 @@ Describe 'Functional tests' {
     It 'Get-ChocoSource without name should return all sources' {
         (Get-ChocoSource).Length | Should -BeGreaterOrEqual 1
     }
+
+    It 'Adds a dummy source' {
+        (Add-ChocoSource -Name google -Uri "https://google.com").Name | Should -Be 'google'
+    }
 }
+
+Describe 'Version' {
+    It 'Returns a valid version number' {
+        $Versions = @('2.1.0', '2.0.0', '1.4.0', '1.3.1' )
+        Get-ChocoVersion | Should -BeIn $Versions
+    }
+}
+
+AfterAll {
+    #Remove-Module -Name $ModuleName -Force
+    choco sources remove -n google -y
+    choco apikey remove -s https://google.com
+}
+
+

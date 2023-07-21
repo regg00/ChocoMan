@@ -1,1 +1,1 @@
-Invoke-Pester -CodeCoverage Public\* -PassThru
+Invoke-Pester -CodeCoverage Public\*
