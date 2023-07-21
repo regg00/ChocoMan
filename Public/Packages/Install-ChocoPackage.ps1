@@ -2,18 +2,25 @@ Function Install-ChocoPackage {
     <#
     .SYNOPSIS
         Installs a chocolatey package. Doesn't asks for confirmation by default. Just like Chocolatey, you may need admin rights to install a package.
+
     .DESCRIPTION    
         Installs a chocolatey package. Doesn't asks for confirmation by default. Just like Chocolatey, you may need admin rights to install a package.
+
     .PARAMETER Name
         The name of the package to install.
+
     .PARAMETER Source
         The source to install the package from.
+
     .PARAMETER Upgrade
         If the package should be upgraded if it already exists.    
+
     .PARAMETER Force
         Will force the reinstallation of the package.
-    .PARAMETER
+
+    .PARAMETER AskForConfirmation
         Ask for confirmation before installing the package.
+
     .EXAMPLE
         Install-ChocoPackage -Name vlc
     .EXAMPLE
@@ -24,7 +31,6 @@ Function Install-ChocoPackage {
     .OUTPUTS
         String
     #>
-    [CmdletBinding(SupportsShouldProcess)]
     [OutputType([String])]
     param(
         [Parameter(Mandatory = $true, Position = 0)]

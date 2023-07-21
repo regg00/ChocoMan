@@ -1,14 +1,24 @@
 Function Get-ChocoPackage {
     <#
     .SYNOPSIS
-        Get a specific locally installed chocolatey package.
+        Get a specific locally installed chocolatey package. Returns all packages if no name is specified.
     .DESCRIPTION    
-        Get a specific locally installed chocolatey package.
+        Get a specific locally installed chocolatey package. Returns all packages if no name is specified.
+    .PARAMETER Name
+        The name of the package to get.
+    .PARAMETER Outdated
+        Get only outdated packages.
     .EXAMPLE
         Get-ChocoPackage -Name vlc
         Name Version
         ---- -------
         vlc  3.0.18
+    .EXAMPLE
+        Get-ChocoPackage -Outdated
+        Name                              CurrentVersion    AvailableVersion Pinned
+        ----                              --------------    ---------------- ------
+        7zip                              22.1.0            23.1.0           false
+        7zip.install                      22.1.0            23.1.0           false
 
     .OUTPUTS
         PSCustomObject
@@ -16,11 +26,20 @@ Function Get-ChocoPackage {
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
-        [String] $Name
+        [String] $Name,
+        [Switch] $Outdated
     )
 
-    if (Test-ChocoInstalled) {        
-        $ChocoPackage = Get-ChocoPackages | Where-Object { $_.Name -eq $Name }
-        Return $ChocoPackage
+    if (Test-ChocoInstalled) {  
+        if ($Outdated) {
+            Return Get-ChocoOutdated
+        }      
+        $Header = "Name", "Version"
+        if ($Name) {            
+            Return ConvertFrom-Csv (choco list -r --nocolor) -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
+        }
+        else {
+            Return ConvertFrom-Csv (choco list -r --nocolor) -Delimiter '|' -Header $Header
+        }        
     }
 }

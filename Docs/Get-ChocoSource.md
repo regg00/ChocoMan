@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-ChocoSources
+# Get-ChocoSource
 
 ## SYNOPSIS
 Get the list of chocolatey sources.
@@ -13,7 +13,7 @@ Get the list of chocolatey sources.
 ## SYNTAX
 
 ```
-Get-ChocoSources [<CommonParameters>]
+Get-ChocoSource [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,6 +30,21 @@ chocolatey          https://community.chocolatey.org/api/v2/                    
 ```
 
 ## PARAMETERS
+
+### -Name
+The name of the source to get.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
