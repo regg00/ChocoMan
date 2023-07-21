@@ -1,17 +1,24 @@
 Function Get-ChocoApiKey {
     <#
     .SYNOPSIS
-        Retrieves, saves or deletes an API key for a particular source
+        Retrieves an API key for a particular source
     .DESCRIPTION    
-        Retrieves, saves or deletes an API key for a particular source
+        Retrieves an API key for a particular source
     .PARAMETER Source
-        The source to retrieve, save or delete the API key for
+        The source to retrieve the API key for
         
     .EXAMPLE
-        Get-ChocoApiKey -Source https://chocolatey.org
-        Source                 Authentication
+        Get-ChocoApiKey
+        Source                 Key
         ------                 --------------
-        https://chocolatey.org (Authenticated)
+        https://chocolatey.org AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxc9DNMivjki8zbeKBN8X5wQA
+        https://cdfgdgdfdg.org AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxc9DNMivjki8zbeKBN8X5wQA
+
+    .EXAMPLE
+        Get-ChocoApiKey -Source https://chocolatey.org
+        Source                 Key
+        ------                 ---
+        https://chocolatey.org AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAxc9DNMivjki8zbeKBN8X5wQA
 
     .OUTPUTS
         PSCustomObject
@@ -23,8 +30,21 @@ Function Get-ChocoApiKey {
     )
 
     if (Test-ChocoInstalled) {  
-        $Header = "Source", "Authentication"      
-        $ChocoApiKey = ConvertFrom-Csv (choco apikey -r --nocolor) -Delimiter '|' -Header $Header
-        Return $ChocoApiKey
+        $Config = Import-ChocoConfig
+
+        $ApiKeys = $Config.chocolatey.apiKeys.ChildNodes
+        $Output = [System.Collections.ArrayList]::new()
+
+        foreach ($ApiKey in $ApiKeys) {
+            [void]$Output.Add(
+                [PSCustomObject]@{
+                    Source = $ApiKey.source
+                    Key    = $ApiKey.key                                                     
+                })            
+        }   
+        if ($Name) {
+            $Output = $Output | Where-Object { $_.Name -eq $Name }
+        }  
+        Return $Output
     }
 }
