@@ -8,7 +8,9 @@ schema: 2.0.0
 # Install-ChocoPackage
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Installs a chocolatey package.
+Doesn't asks for confirmation by default.
+Just like Chocolatey, you may need admin rights to install a package.
 
 ## SYNTAX
 
@@ -18,21 +20,31 @@ Install-ChocoPackage [-Name] <String> [-Source <String>] [-Upgrade] [-Force] [-A
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Installs a chocolatey package.
+Doesn't asks for confirmation by default.
+Just like Chocolatey, you may need admin rights to install a package.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Install-ChocoPackage -Name vlc
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+Install-ChocoPackage -Name vlc -Source chocolatey
+```
+
+### EXAMPLE 3
+```
+Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
+```
 
 ## PARAMETERS
 
 ### -AskForConfirmation
-{{ Fill AskForConfirmation Description }}
+Ask for confirmation before installing the package.
 
 ```yaml
 Type: SwitchParameter
@@ -41,7 +53,67 @@ Aliases:
 
 Required: False
 Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Force
+Will force the reinstallation of the package.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+The name of the package to install.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Source
+The source to install the package from.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Chocolatey
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Upgrade
+If the package should be upgraded if it already exists.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -53,66 +125,6 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Force
-{{ Fill Force Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Name
-{{ Fill Name Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Source
-{{ Fill Source Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Upgrade
-{{ Fill Upgrade Description }}
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
 
 Required: False
 Position: Named
@@ -142,12 +154,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.String
-
+### String
 ## NOTES
 
 ## RELATED LINKS

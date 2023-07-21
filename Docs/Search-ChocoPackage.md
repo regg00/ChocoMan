@@ -53,6 +53,21 @@ vlc  3.0.18
 
 ## PARAMETERS
 
+### -Exact
+Search for an exact match.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
 The name of the package to search for.
 
@@ -79,21 +94,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: Chocolatey
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Exact
-Search for an exact match.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

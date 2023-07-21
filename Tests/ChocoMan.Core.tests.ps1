@@ -71,10 +71,18 @@ Describe 'Functional tests' {
     }
 
     It 'Package "chocolatey" should be installed' {
-        (Get-ChocoPackages | Where-Object { $_.Name -like 'chocolatey' }).Name | Should -Be 'chocolatey'
+        (Get-ChocoPackage -Name chocolatey).Name | Should -Be "chocolatey"
+    }
+
+    It 'Get-ChocoPackage without name should return all packages' {
+        (Get-ChocoPackage).Length | Should -BeGreaterThan 1
     }
 
     It 'Source "chocolatey" should be available' {
-        (Get-ChocoSources | Where-Object { $_.Name -eq 'chocolatey' }).Name | Should -Be 'chocolatey'
+        (Get-ChocoSource -Name chocolatey).Name | Should -Be 'chocolatey'
+    }
+
+    It 'Get-ChocoSource without name should return all sources' {
+        (Get-ChocoSource).Length | Should -BeGreaterOrEqual 1
     }
 }
