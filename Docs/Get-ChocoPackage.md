@@ -9,15 +9,17 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Get a specific locally installed chocolatey package.
+Returns all packages if no name is specified.
 
 ## SYNTAX
 
 ```
-Get-ChocoPackage [[-Name] <String>] [<CommonParameters>]
+Get-ChocoPackage [[-Name] <String>] [-Outdated] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Get a specific locally installed chocolatey package.
+Returns all packages if no name is specified.
 
 ## EXAMPLES
 
@@ -29,10 +31,19 @@ Name Version
 vlc  3.0.18
 ```
 
+### EXAMPLE 2
+```
+Get-ChocoPackage -Outdated
+Name                              CurrentVersion    AvailableVersion Pinned
+----                              --------------    ---------------- ------
+7zip                              22.1.0            23.1.0           false
+7zip.install                      22.1.0            23.1.0           false
+```
+
 ## PARAMETERS
 
 ### -Name
-{{ Fill Name Description }}
+The name of the package to get.
 
 ```yaml
 Type: String
@@ -42,6 +53,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Outdated
+Get only outdated packages.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

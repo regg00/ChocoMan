@@ -5,56 +5,41 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-ChocoApiKey
+# Get-ChocoSource
 
 ## SYNOPSIS
-Sets an api key for a particular source so it doesn't need to be specified every time.
+Get the list of chocolatey sources.
 
 ## SYNTAX
 
 ```
-Set-ChocoApiKey [-Source] <String> [-ApiKey] <String> [<CommonParameters>]
+Get-ChocoSource [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Sets an api key for a particular source so it doesn't need to be specified every time.
+Get the list of chocolatey sources.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Set-ChocoApiKey -Source https://chocolatey.org -ApiKey 1234
-Source             Status          ApiKey
-------             ------          ------
-https://google.com Updated API key *****************
+Get-ChocoSources
+Name                Uri                                                 UserName     BypassProxy SelfService AdminOnly
+----                ---                                                 --------     ----------- ----------- ---------        
+chocolatey          https://community.chocolatey.org/api/v2/                         0           False       False
 ```
 
 ## PARAMETERS
 
-### -ApiKey
-{{ Fill ApiKey Description }}
+### -Name
+The name of the source to get.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Source
-The source to retrieve, save or delete the API key for
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
