@@ -28,7 +28,8 @@ Function Set-ChocoApiKey {
 
     if (Test-ChocoInstalled) { 
         Try {
-            $ChocoApiKey = choco apikey add -s="$Source" -k="$ApiKey" -r        
+            
+            $ChocoApiKey = Invoke-ChocoCmd -Arguments "apikey", "-s=$Source", "-k=$ApiKey"     
         
             if ($ChocoApiKey -like "Nothing to change*") {
                 Write-Verbose "Nothing to change"

@@ -28,18 +28,19 @@ Function Get-ChocoPackage {
     param(
         [String] $Name,
         [Switch] $Outdated
-    )
+    )    
 
-    if (Test-ChocoInstalled) {  
+    if (Test-ChocoInstalled) { 
+        $ChocoCommandOutput = Invoke-ChocoCmd -Arguments "list" -ErrorAction SilentlyContinue 
         if ($Outdated) {
             Return Get-ChocoOutdated
         }      
         $Header = "Name", "Version"
         if ($Name) {            
-            Return ConvertFrom-Csv (choco list -r --nocolor) -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
+            Return ConvertFrom-Csv $ChocoCommandOutput -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
         }
         else {
-            Return ConvertFrom-Csv (choco list -r --nocolor) -Delimiter '|' -Header $Header
+            Return ConvertFrom-Csv $ChocoCommandOutput -Delimiter '|' -Header $Header
         }        
     }
 }

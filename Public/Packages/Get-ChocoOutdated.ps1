@@ -20,7 +20,7 @@ Function Get-ChocoOutdated {
 
     if (Test-ChocoInstalled) {
         $Header = "Name", "CurrentVersion", "AvailableVersion", "Pinned"
-        $ChocoPackages = ConvertFrom-Csv (choco outdated -r --nocolor) -Delimiter '|' -Header $Header
+        $ChocoPackages = ConvertFrom-Csv (Invoke-ChocoCmd -Arguments "outdated") -Delimiter '|' -Header $Header
         Return $ChocoPackages
     }
 
