@@ -50,7 +50,6 @@ The following commands are available:
 | ------------------------------------------------------ | ------------------ | ---------------------------------------------------------------------------------- |
 | [Get-ChocoOutdated](./Docs/Get-ChocoOutdated.md)       | :white_check_mark: | Get the list of outdated chocolatey packages.                                      |
 | [Get-ChocoPackage](./Docs/Get-ChocoPackage.md)         | :white_check_mark: | Get a specific locally installed chocolatey package.                               |
-| [Get-ChocoPackages](./Docs/Get-ChocoPackages.md)       | :white_check_mark: | Get the list of all installed chocolatey packages.                                 |
 | [Get-ChocoSources](./Docs/Get-ChocoSources.md)         | :white_check_mark: | Get the list of chocolatey sources.                                                |
 | [Get-ChocoVersion](./Docs/Get-ChocoVersion.md)         | :white_check_mark: | Get the version of chocolatey.                                                     |
 | [Search-ChocoPackage](./Docs/Search-ChocoPackage.md)   | :white_check_mark: | Search for a chocolatey package.                                                   |
