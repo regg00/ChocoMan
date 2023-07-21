@@ -1,9 +1,11 @@
-Function Get-ChocoSources {
+Function Get-ChocoSource {
     <#
     .SYNOPSIS
         Get the list of chocolatey sources.
     .DESCRIPTION
         Get the list of chocolatey sources.
+    .PARAMETER Name
+        The name of the source to get.
     .EXAMPLE
         Get-ChocoSources
         Name                Uri                                                 UserName     BypassProxy SelfService AdminOnly
@@ -15,11 +17,20 @@ Function Get-ChocoSources {
     #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
-    param()
+    param(
+        [String] $Name
+    )
     
     if (Test-ChocoInstalled) {
         $Header = "Name", "Uri", "Unknown0", "UserName", "Unknown1", "BypassProxy", "SelfService", "AdminOnly"
-        $ChocoPackages = ConvertFrom-Csv (choco source list -r --nocolor) -Delimiter '|' -Header $Header
+
+        if ($Name) {
+            $ChocoPackages = ConvertFrom-Csv (choco source list -r --nocolor -n $Name) -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
+        }
+        else {
+            $ChocoPackages = ConvertFrom-Csv (choco source list -r --nocolor) -Delimiter '|' -Header $Header
+        }
+        
         Return $ChocoPackages | Select-Object Name, Uri, Username, BypassProxy, SelfService, AdminOnly
     }
 }

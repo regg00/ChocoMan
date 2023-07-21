@@ -41,7 +41,7 @@
         'Get-ChocoPackages',
         'Get-ChocoPackage',
         'Get-ChocoOutdated',
-        'Get-ChocoSources',
+        'Get-ChocoSource',
         'Search-ChocoPackage',
         'Install-Choco',
         'Install-ChocoPackage',
