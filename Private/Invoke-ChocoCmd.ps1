@@ -6,7 +6,7 @@ Function Invoke-ChocoCmd {
         Invokes a Chocolatey command
 
     .EXAMPLE
-                
+        Invoke-ChocoCmd -Verbose -Arguments "list", "--no-progress"        
 
     .OUTPUTS
         Array
