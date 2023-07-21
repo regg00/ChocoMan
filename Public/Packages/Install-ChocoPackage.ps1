@@ -31,7 +31,6 @@ Function Install-ChocoPackage {
     .OUTPUTS
         String
     #>
-    [CmdletBinding(SupportsShouldProcess)]
     [OutputType([String])]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
