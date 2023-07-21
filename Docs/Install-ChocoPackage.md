@@ -15,8 +15,8 @@ Just like Chocolatey, you may need admin rights to install a package.
 ## SYNTAX
 
 ```
-Install-ChocoPackage [-Name] <String> [-Source <String>] [-Upgrade] [-Force] [-AskForConfirmation] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+Install-ChocoPackage [-Name] <String> [-Source <String>] [-Upgrade] [-Force] [-AskForConfirmation]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -114,37 +114,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
