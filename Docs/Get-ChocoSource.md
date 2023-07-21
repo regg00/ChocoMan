@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-ChocoSource
 
 ## SYNOPSIS
-Get the list of chocolatey sources.
+Retrieves the configured Chocolatey sources
 
 ## SYNTAX
 
@@ -17,22 +17,31 @@ Get-ChocoSource [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get the list of chocolatey sources.
+Retrieves the configured Chocolatey sources
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-ChocoSources
-Name                Uri                                                 UserName     BypassProxy SelfService AdminOnly
-----                ---                                                 --------     ----------- ----------- ---------        
-chocolatey          https://community.chocolatey.org/api/v2/                         0           False       False
+Get-ChocoSource 
+Name                Uri                                              Disabled BypassProxy SelfService AdminOnly Priority User
+----                ---                                              -------- ----------- ----------- --------- -------- ----
+chocolatey          https://community.chocolatey.org/api/v2/         false    false       false       false     0
+chocolatey.licensed https://licensedpackages.chocolatey.org/api/v2/  false    false       false       false     10       customer
+```
+
+### EXAMPLE 2
+```
+Get-ChocoSource -Name chocolatey
+Name       Uri                                      Disabled BypassProxy SelfService AdminOnly Priority User
+----       ---                                      -------- ----------- ----------- --------- -------- ----
+chocolatey https://community.chocolatey.org/api/v2/ false    false       false       false     0
 ```
 
 ## PARAMETERS
 
 ### -Name
-The name of the source to get.
+The name of the source to retrieve
 
 ```yaml
 Type: String
