@@ -2,11 +2,11 @@ Function Set-ChocoApiKey {
     <#
     .SYNOPSIS
         Sets an api key for a particular source so it doesn't need to be specified every time.
-    .DESCRIPTION    
+    .DESCRIPTION
         Sets an api key for a particular source so it doesn't need to be specified every time.
     .PARAMETER Source
         The source to retrieve, save or delete the API key for
-        
+
     .EXAMPLE
         Set-ChocoApiKey -Source https://chocolatey.org -ApiKey 1234
         Source             Status          ApiKey
@@ -26,11 +26,11 @@ Function Set-ChocoApiKey {
         [String] $ApiKey
     )
 
-    if (Test-ChocoInstalled) { 
+    if (Test-ChocoInstalled) {
         Try {
-            
-            $ChocoApiKey = Invoke-ChocoCmd -Arguments "apikey", "-s=$Source", "-k=$ApiKey"     
-        
+
+            $ChocoApiKey = Invoke-ChocoCmd -Arguments "apikey", "-s=$Source", "-k=$ApiKey"
+
             if ($ChocoApiKey -like "Nothing to change*") {
                 Write-Verbose "Nothing to change"
                 $Status = "Nothing to change"
@@ -43,21 +43,21 @@ Function Set-ChocoApiKey {
                 Write-Verbose "Added API key"
                 $Status = "Added API key"
             }
-        
+
             $Response = [PSCustomObject]@{
-                Source = $Source            
+                Source = $Source
                 Status = $Status
                 ApiKey = '*****************'
             }
-        }   
+        }
         Catch {
             $Response = [PSCustomObject]@{
-                Source = $Source            
+                Source = $Source
                 Status = "Error. Cannot process the request."
                 ApiKey = '*****************'
             }
-        }           
-        
+        }
+
         Return $Response
     }
 }

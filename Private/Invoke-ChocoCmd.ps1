@@ -2,29 +2,29 @@ Function Invoke-ChocoCmd {
     <#
     .SYNOPSIS
         Invokes a Chocolatey command
-    .DESCRIPTION    
+    .DESCRIPTION
         Invokes a Chocolatey command
 
     .EXAMPLE
-        Invoke-ChocoCmd -Verbose -Arguments "list", "--no-progress"        
+        Invoke-ChocoCmd -Verbose -Arguments "list", "--no-progress"
 
     .OUTPUTS
         Array
     #>
     [CmdletBinding()]
     [OutputType([array])]
-    param( 
-        [array] $Arguments            
+    param(
+        [array] $Arguments
     )
 
-    if (Test-ChocoInstalled) {  
-        
+    if (Test-ChocoInstalled) {
+
         $Arguments += "-r"
         $Arguments += "--no-color"
-            
-        $ChocoCommand = @(Get-Command 'choco.exe' -CommandType 'Application' -ErrorAction 'SilentlyContinue')[0]        
+
+        $ChocoCommand = @(Get-Command 'choco.exe' -CommandType 'Application' -ErrorAction 'SilentlyContinue')[0]
         Write-Verbose "choco $($Arguments -join ' ')"
         $Output = (&$ChocoCommand $Arguments)
-        Return $Output                        
+        Return $Output
     }
 }

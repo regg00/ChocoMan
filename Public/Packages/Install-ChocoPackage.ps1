@@ -3,7 +3,7 @@ Function Install-ChocoPackage {
     .SYNOPSIS
         Installs a chocolatey package. Doesn't asks for confirmation by default. Just like Chocolatey, you may need admin rights to install a package.
 
-    .DESCRIPTION    
+    .DESCRIPTION
         Installs a chocolatey package. Doesn't asks for confirmation by default. Just like Chocolatey, you may need admin rights to install a package.
 
     .PARAMETER Name
@@ -13,7 +13,7 @@ Function Install-ChocoPackage {
         The source to install the package from.
 
     .PARAMETER Upgrade
-        If the package should be upgraded if it already exists.    
+        If the package should be upgraded if it already exists.
 
     .PARAMETER Force
         Will force the reinstallation of the package.
@@ -49,18 +49,18 @@ Function Install-ChocoPackage {
         elseif ($Force) {
             $Command = "install --force"
         }
-        
+
         if ($AskForConfirmation) {
             choco $Command $Name --source $Source
             Write-Verbose "choco $Command $Name --source $Source"
-            
+
         }
         else {
-            choco $Command $Name -y --source $Source            
+            choco $Command $Name -y --source $Source
             Write-Verbose "choco $Command $Name -y --source $Source"
         }
-        
-                       
+
+
     }
     else {
         Write-Error "Chocolatey is not installed. Please install it first."

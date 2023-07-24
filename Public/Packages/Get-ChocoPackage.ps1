@@ -2,7 +2,7 @@ Function Get-ChocoPackage {
     <#
     .SYNOPSIS
         Get a specific locally installed chocolatey package. Returns all packages if no name is specified.
-    .DESCRIPTION    
+    .DESCRIPTION
         Get a specific locally installed chocolatey package. Returns all packages if no name is specified.
     .PARAMETER Name
         The name of the package to get.
@@ -28,19 +28,19 @@ Function Get-ChocoPackage {
     param(
         [String] $Name,
         [Switch] $Outdated
-    )    
+    )
 
-    if (Test-ChocoInstalled) { 
-        $ChocoCommandOutput = Invoke-ChocoCmd -Arguments "list" -ErrorAction SilentlyContinue 
+    if (Test-ChocoInstalled) {
+        $ChocoCommandOutput = Invoke-ChocoCmd -Arguments "list" -ErrorAction SilentlyContinue
         if ($Outdated) {
             Return Get-ChocoOutdated
-        }      
+        }
         $Header = "Name", "Version"
-        if ($Name) {            
+        if ($Name) {
             Return ConvertFrom-Csv $ChocoCommandOutput -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
         }
         else {
             Return ConvertFrom-Csv $ChocoCommandOutput -Delimiter '|' -Header $Header
-        }        
+        }
     }
 }

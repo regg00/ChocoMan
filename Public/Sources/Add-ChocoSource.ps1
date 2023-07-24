@@ -8,8 +8,8 @@ Function Add-ChocoSource {
         Add-ChocoSource
         Name                Uri                                                 UserName
         ----                ---                                                 --------
-        chocolatey          https://community.chocolatey.org/api/v2/                    
-                
+        chocolatey          https://community.chocolatey.org/api/v2/
+
     .OUTPUTS
         PSCustomObject
     #>
@@ -26,11 +26,11 @@ Function Add-ChocoSource {
 
         [String] $Password
     )
-    
+
     if (Test-ChocoInstalled) {
         if ($Password -and $UserName) {
             $ChocoSource = choco source add -n $Name -s $Uri -u $UserName -p $Password
-        }        
+        }
         else {
             $ChocoSource = choco source add -n $Name -s $Uri
         }
@@ -40,7 +40,7 @@ Function Add-ChocoSource {
             Uri      = $Uri
             UserName = $UserName
         }
-        
+
         Return $Response
     }
 }

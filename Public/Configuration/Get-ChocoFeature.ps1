@@ -2,7 +2,7 @@ Function Get-ChocoFeature {
     <#
     .SYNOPSIS
         Retrieves the Chocolatey feature
-    .DESCRIPTION    
+    .DESCRIPTION
         Retrieves the Chocolatey feature
     .PARAMETER Name
         The name of the feature to retrieve
@@ -26,11 +26,11 @@ Function Get-ChocoFeature {
     #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
-    param(     
-        [String] $Name   
+    param(
+        [String] $Name
     )
 
-    if (Test-ChocoInstalled) {  
+    if (Test-ChocoInstalled) {
         $Config = Import-ChocoConfig
 
         $Features = $Config.chocolatey.features.ChildNodes
@@ -42,12 +42,13 @@ Function Get-ChocoFeature {
                     Name          = $Feature.name
                     Enabled       = $Feature.enabled
                     SetExplicitly = $Feature.setExplicitly
-                    Description   = $Feature.description                                   
-                })            
-        }   
+                    Description   = $Feature.description
+                })
+        }
         if ($Name) {
             $Output = $Output | Where-Object { $_.Name -eq $Name }
-        }  
+        }
         Return $Output
     }
 }
+

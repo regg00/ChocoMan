@@ -2,7 +2,7 @@ Function Get-ChocoOutdated {
     <#
     .SYNOPSIS
         Get the list of outdated chocolatey packages.
-    .DESCRIPTION    
+    .DESCRIPTION
         Get the list of outdated chocolatey packages.
     .EXAMPLE
         Get-ChocoOutdated

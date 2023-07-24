@@ -2,11 +2,11 @@ Function Get-ChocoApiKey {
     <#
     .SYNOPSIS
         Retrieves an API key for a particular source
-    .DESCRIPTION    
+    .DESCRIPTION
         Retrieves an API key for a particular source
     .PARAMETER Source
         The source to retrieve the API key for
-        
+
     .EXAMPLE
         Get-ChocoApiKey
         Source                 Key
@@ -29,7 +29,7 @@ Function Get-ChocoApiKey {
         [String] $Source
     )
 
-    if (Test-ChocoInstalled) {  
+    if (Test-ChocoInstalled) {
         $Config = Import-ChocoConfig
 
         $ApiKeys = $Config.chocolatey.apiKeys.ChildNodes
@@ -39,12 +39,12 @@ Function Get-ChocoApiKey {
             [void]$Output.Add(
                 [PSCustomObject]@{
                     Source = $ApiKey.source
-                    Key    = $ApiKey.key                                                     
-                })            
-        }   
+                    Key    = $ApiKey.key
+                })
+        }
         if ($Name) {
             $Output = $Output | Where-Object { $_.Name -eq $Name }
-        }  
+        }
         Return $Output
     }
 }

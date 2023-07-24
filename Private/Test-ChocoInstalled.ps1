@@ -10,13 +10,13 @@ Function Test-ChocoInstalled {
     [CmdletBinding()]
     [OutputType([Boolean])]
     param()
-    
+
     $CheckPath = if ($env:ChocolateyInstall) { $env:ChocolateyInstall } else { "$env:PROGRAMDATA\chocolatey" }
     $Command = Get-Command choco.exe -ErrorAction Ignore
 
     if ($Command.Path -and (Test-Path -Path $Command.Path)) {
-        # choco is in the %PATH% environment variable, assume it's installed  
-        Write-Verbose "Chocolatey is installed."      
+        # choco is in the %PATH% environment variable, assume it's installed
+        Write-Verbose "Chocolatey is installed."
         Return $true
     }
     elseif (-not (Test-Path $CheckPath)) {
@@ -30,8 +30,8 @@ Function Test-ChocoInstalled {
         Return $false
     }
     else {
-        # Install folder exists and is not empty    
-        Write-Verbose "Chocolatey is installed."    
+        # Install folder exists and is not empty
+        Write-Verbose "Chocolatey is installed."
         Return $true
     }
 }

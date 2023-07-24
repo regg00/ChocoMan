@@ -2,8 +2,8 @@ Function Install-Choco {
     <#
     .SYNOPSIS
         Install chocolatey.
-    .DESCRIPTION    
-        Install chocolatey.    
+    .DESCRIPTION
+        Install chocolatey.
     .PARAMETER InstallerUrl
         The url to the chocolatey installer.
     .EXAMPLE
@@ -33,8 +33,8 @@ Function Install-Choco {
         [String] $InstallerUrl = 'https://chocolatey.org/install.ps1'
     )
 
-    if (!(Test-ChocoInstalled)) {        
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString($InstallerUrl))        
+    if (!(Test-ChocoInstalled)) {
+        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString($InstallerUrl))
         return "Chocolatey has been installed."
     }
     else {

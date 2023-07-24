@@ -2,7 +2,7 @@ Function Get-ChocoVersion {
     <#
     .SYNOPSIS
         Get the version of chocolatey.
-    .DESCRIPTION    
+    .DESCRIPTION
         Get the version of chocolatey.
     .EXAMPLE
         Get-ChocoVersion

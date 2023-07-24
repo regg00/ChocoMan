@@ -2,7 +2,7 @@ Function Get-ChocoConfig {
     <#
     .SYNOPSIS
         Retrieves the Chocolatey configuration
-    .DESCRIPTION    
+    .DESCRIPTION
         Retrieves the Chocolatey configuration
     .PARAMETER Name
         The name of the configuration to retrieve
@@ -18,18 +18,18 @@ Function Get-ChocoConfig {
         Get-ChocoConfig -Name cacheLocation
         Name          Value Description
         ----          ----- -----------
-        cacheLocation       Cache location if not TEMP folder. Replaces `$env:TEMP` value for choco.exe process. It is highly recommended 
+        cacheLocation       Cache location if not TEMP folder. Replaces `$env:TEMP` value for choco.exe process. It is highly recommended
 
     .OUTPUTS
         PSCustomObject
     #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
-    param(     
-        [String] $Name   
+    param(
+        [String] $Name
     )
 
-    if (Test-ChocoInstalled) {  
+    if (Test-ChocoInstalled) {
         $Config = Import-ChocoConfig
 
         $Configs = $Config.chocolatey.config.ChildNodes
@@ -40,12 +40,12 @@ Function Get-ChocoConfig {
                 [PSCustomObject]@{
                     Name        = $Config.key
                     Value       = $Config.value
-                    Description = $Config.description                                   
-                })            
-        }   
+                    Description = $Config.description
+                })
+        }
         if ($Name) {
             $Output = $Output | Where-Object { $_.Name -eq $Name }
-        }  
+        }
         Return $Output
     }
 }

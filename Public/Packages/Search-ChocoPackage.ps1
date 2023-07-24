@@ -2,7 +2,7 @@ Function Search-ChocoPackage {
     <#
     .SYNOPSIS
         Search for a chocolatey package.
-    .DESCRIPTION    
+    .DESCRIPTION
         Search for a chocolatey package.
     .PARAMETER Name
         The name of the package to search for.
@@ -35,7 +35,7 @@ Function Search-ChocoPackage {
         vlc  3.0.18
     .OUTPUTS
         PSCustomObject
-    
+
     #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
@@ -47,22 +47,22 @@ Function Search-ChocoPackage {
         [Switch] $Exact
     )
 
-    if (Test-ChocoInstalled) {        
+    if (Test-ChocoInstalled) {
         $Header = "Name", "Version"
         Try {
 
             if ($Exact) {
-                $ChocoPackages = ConvertFrom-Csv (choco search $Name -s $Source -r --exact --nocolor) -Delimiter '|' -Header $Header        
+                $ChocoPackages = ConvertFrom-Csv (choco search $Name -s $Source -r --exact --nocolor) -Delimiter '|' -Header $Header
             }
             else {
-                $ChocoPackages = ConvertFrom-Csv (choco search $Name -s $Source -r --nocolor) -Delimiter '|' -Header $Header        
+                $ChocoPackages = ConvertFrom-Csv (choco search $Name -s $Source -r --nocolor) -Delimiter '|' -Header $Header
             }
-            Return $ChocoPackages        
+            Return $ChocoPackages
         }
         Catch [System.Management.Automation.ParameterBindingException] {
             Write-Verbose "No package found with name '$Name' on source '$Source'."
             Return $null
-        }    
+        }
     }
 
 }
