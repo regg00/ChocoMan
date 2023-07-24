@@ -15,7 +15,7 @@ Function Import-ChocoConfig {
         XML
     #>
     [CmdletBinding()]
-    [OutputType([PSCustomObject])]
+    [OutputType([System.Xml.XmlDocument])]
     param(
     )
 
