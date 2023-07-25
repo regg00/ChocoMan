@@ -17,7 +17,7 @@ Function Add-ChocoSource {
         chocolatey          https://community.chocolatey.org/api/v2/
 
     .OUTPUTS
-        String
+        PSCustomObject
     #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
@@ -45,9 +45,17 @@ Function Add-ChocoSource {
     }
     process {
         try {
+
             Invoke-ChocoCmd $Arguments
+            Return [PSCustomObject]@{
+                Name = $Name
+                Uri  = $Uri
+            }
+
         }
-        catch {}
+        catch {
+            Write-Error "Cannot add source. Error: $_"
+        }
 
     }
     end {
