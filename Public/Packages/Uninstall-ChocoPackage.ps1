@@ -25,41 +25,40 @@ Function Uninstall-ChocoPackage {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        $Name
-
+        $Name,
+        [Switch] $Force,
+        [Switch] $AskForConfirmation
     )
-
     begin {
+        if (-Not (Test-ChocoInstalled)) {
+            Write-Error "Chocolatey is not installed. Please install it first."
+            return
+        }
+
+        [Array]$Arguments = "uninstall"
+
+        if ($Force) {
+            $Arguments += "--force"
+        }
+
+        if (-Not ($AskForConfirmation)) {
+            $Arguments += "-y"
+        }
 
     }
-
     process {
-        if (Test-ChocoInstalled) {
-            [Array]$Arguments = "uninstall"
 
-            if ($Name -is [System.Management.Automation.PSCustomObject]) {
-                $Arguments += $Name.Name
-            }
-
-
-            if ($Force) {
-                $Arguments += "--force"
-            }
-            $Arguments += $Name
-
-            if ($AskForConfirmation) {
-                Invoke-ChocoCmd $Arguments
-
-            }
-            else {
-                Invoke-ChocoCmd $Arguments
-            }
-
+        if ($Name -is [System.Management.Automation.PSCustomObject]) {
+            $Arguments += $Name.Name
         }
         else {
-            Write-Error "Chocolatey is not installed. Please install it first."
+            $Arguments += $Name
         }
+
+    }
+    end {
+        Write-Host "choco $Arguments" -ForegroundColor green
+        Invoke-ChocoCmd $Arguments
     }
 
-    end {}
 }

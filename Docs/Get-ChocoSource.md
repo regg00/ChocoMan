@@ -23,7 +23,7 @@ Retrieves the configured Chocolatey sources
 
 ### EXAMPLE 1
 ```
-Get-ChocoSource 
+Get-ChocoSource
 Name                Uri                                              Disabled BypassProxy SelfService AdminOnly Priority User
 ----                ---                                              -------- ----------- ----------- --------- -------- ----
 chocolatey          https://community.chocolatey.org/api/v2/         false    false       false       false     0
