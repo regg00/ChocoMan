@@ -59,8 +59,8 @@ The following commands are available:
 | [Add-ChocoSource ](./Docs/Add-ChocoSource.md)              | :white_check_mark: | Adds a new chocolatey source                                                       |
 | [Get-ChocoConfig ](./Docs/Get-ChocoConfig.md)              | :white_check_mark: | Retrieves the chocolatey configuration                                             |
 | [Get-ChocoFeature ](./Docs/Get-ChocoFeature.md)            | :white_check_mark: | Retrieves the chocolatey features                                                  |
-| [Install-ChocoPackage](./Docs/Install-ChocoPackage.md)     | :lab_coat:         | Install chocolatey.                                                                |
 | [Uninstall-ChocoPackage](./Docs/Uninstall-ChocoPackage.md) | :white_check_mark: | Install chocolatey.                                                                |
+| [Install-ChocoPackage](./Docs/Install-ChocoPackage.md)     | :lab_coat:         | Install chocolatey.                                                                |
 | New-ChocoPackage                                           | :soon:             | Generates files necessary for a chocolatey package from a template                 |
 | Build-ChocoPackage                                         | :soon:             | Packages nuspec, scripts, and other Chocolatey package resources into a nupkg file |
 | Publish-ChocoPackage                                       | :soon:             | Pushes a compiled nupkg to a source                                                |
