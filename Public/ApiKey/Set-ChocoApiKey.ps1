@@ -16,7 +16,7 @@ Function Set-ChocoApiKey {
     .OUTPUTS
         PSCustomObject
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType([PSCustomObject])]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -28,26 +28,29 @@ Function Set-ChocoApiKey {
 
     if (Test-ChocoInstalled) {
         Try {
+            if ($PSCmdlet.ShouldProcess($Source)) {
+                $ChocoApiKey = Invoke-ChocoCmd -Arguments "apikey", "-s=$Source", "-k=$ApiKey"
 
-            $ChocoApiKey = Invoke-ChocoCmd -Arguments "apikey", "-s=$Source", "-k=$ApiKey"
+                if ($ChocoApiKey -like "Nothing to change*") {
+                    Write-Verbose "Nothing to change"
+                    $Status = "Nothing to change"
+                }
+                elseif ($ChocoApiKey -like "Updated API key*") {
+                    Write-Verbose "Updated API key"
+                    $Status = "Updated API key"
+                }
+                elseif ($ChocoApiKey -like "Added API key*") {
+                    Write-Verbose "Added API key"
+                    $Status = "Added API key"
+                }
 
-            if ($ChocoApiKey -like "Nothing to change*") {
-                Write-Verbose "Nothing to change"
-                $Status = "Nothing to change"
-            }
-            elseif ($ChocoApiKey -like "Updated API key*") {
-                Write-Verbose "Updated API key"
-                $Status = "Updated API key"
-            }
-            elseif ($ChocoApiKey -like "Added API key*") {
-                Write-Verbose "Added API key"
-                $Status = "Added API key"
-            }
+                $Response = [PSCustomObject]@{
+                    Source = $Source
+                    Status = $Status
+                    ApiKey = '*****************'
+                }
 
-            $Response = [PSCustomObject]@{
-                Source = $Source
-                Status = $Status
-                ApiKey = '*****************'
+
             }
         }
         Catch {
