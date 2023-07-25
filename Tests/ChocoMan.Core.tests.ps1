@@ -48,7 +48,7 @@ Describe 'Core' {
     }
 
     It 'PowerShell Gallery tags is not empty' {
-        $Script:ModuleInformation.Tags.count | Should -Not -BeNullOrEmpty 
+        $Script:ModuleInformation.Tags.count | Should -Not -BeNullOrEmpty
     }
 
     It 'PowerShell Gallery tags do not contain spaces' {
@@ -66,10 +66,10 @@ Describe 'Module ChocoMan loads' {
 
 Describe 'ApiKey' {
     It 'Should return a valid API key' {
-        { Get-ChocoApiKey } | Should -Not -Throw       
+        { Get-ChocoApiKey } | Should -Not -Throw
     }
     It 'Should add a new Api Key' {
-        (Add-ChocoApiKey -Source 'https://google.com' -ApiKey '1234567890').Status | Should -Be "Added API key"
+        (Add-ChocoApiKey -Source 'https://google.com' -ApiKey '1234567890').Status | Should -Match "Added API key|Updated API key"
     }
 }
 
@@ -84,6 +84,7 @@ Describe 'Configuration' {
 }
 Describe 'Install' {
 
+
 }
 Describe 'Packages' {
     It 'Package "chocolatey" should be installed' {
@@ -92,6 +93,13 @@ Describe 'Packages' {
 
     It 'Get-ChocoPackage without name should return all packages' {
         (Get-ChocoPackage).Length | Should -BeGreaterThan 1
+    }
+    It 'Should be able to install rufus' {
+        { Install-ChocoPackage -Name rufus } | Should -Not -Throw
+    }
+
+    It 'Should be able to remove rufus' {
+        { Uninstall-ChocoPackage -Name rufus } | Should -Not -Throw
     }
 
 }

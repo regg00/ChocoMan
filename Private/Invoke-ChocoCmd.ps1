@@ -14,7 +14,7 @@ Function Invoke-ChocoCmd {
     [CmdletBinding()]
     [OutputType([array])]
     param(
-        [array] $Arguments
+        [String[]] $Arguments
     )
 
     if (Test-ChocoInstalled) {
@@ -23,7 +23,7 @@ Function Invoke-ChocoCmd {
         $Arguments += "--no-color"
 
         $ChocoCommand = @(Get-Command 'choco.exe' -CommandType 'Application' -ErrorAction 'SilentlyContinue')[0]
-        Write-Verbose "choco $($Arguments -join ' ')"
+        Write-Verbose "Command to execute: choco $($Arguments -join ' ')"
         $Output = (&$ChocoCommand $Arguments)
         Return $Output
     }

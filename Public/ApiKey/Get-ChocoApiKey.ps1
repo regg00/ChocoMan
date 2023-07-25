@@ -4,8 +4,6 @@ Function Get-ChocoApiKey {
         Retrieves an API key for a particular source
     .DESCRIPTION
         Retrieves an API key for a particular source
-    .PARAMETER Source
-        The source to retrieve the API key for
 
     .EXAMPLE
         Get-ChocoApiKey
@@ -26,7 +24,6 @@ Function Get-ChocoApiKey {
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
-        [String] $Source
     )
 
     if (Test-ChocoInstalled) {

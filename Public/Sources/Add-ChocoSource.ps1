@@ -4,6 +4,12 @@ Function Add-ChocoSource {
         Add a new chocolatey source.
     .DESCRIPTION
         Add a new chocolatey source.
+    .PARAMETER Name
+        The name of the source.
+    .PARAMETER Uri
+        The Uri of the source.
+    .PARAMETER Credential
+        The credential to use to access the source.
     .EXAMPLE
         Add-ChocoSource
         Name                Uri                                                 UserName
@@ -22,25 +28,37 @@ Function Add-ChocoSource {
         [Parameter(Mandatory = $true)]
         [String] $Uri,
 
-        [String] $UserName,
-
-        [String] $Password
+        [PSCredential] $Credential
     )
-
-    if (Test-ChocoInstalled) {
-        if ($Password -and $UserName) {
-            $ChocoSource = choco source add -n $Name -s $Uri -u $UserName -p $Password
-        }
-        else {
-            $ChocoSource = choco source add -n $Name -s $Uri
+    begin {
+        if (-Not (Test-ChocoInstalled)) {
+            Write-Error "Chocolatey is not installed. Please install it first."
+            return
         }
 
-        $Response = [PSCustomObject]@{
-            Name     = $Name
-            Uri      = $Uri
-            UserName = $UserName
+        [String[]]$Arguments = "source", "add", "-s=""$Uri""", "-n=$Name"
+
+        if ($Credential) {
+            $Arguments += "-u=$($Credential.GetNetworkCredential().UserName)"
+            $Arguments += "-p=$($Credential.GetNetworkCredential().Password)"
+        }
+    }
+    process {
+        try {
+
+            Invoke-ChocoCmd $Arguments
+            Return [PSCustomObject]@{
+                Name = $Name
+                Uri  = $Uri
+            }
+
+        }
+        catch {
+            Write-Error "Cannot add source. Error: $_"
         }
 
-        Return $Response
+    }
+    end {
+
     }
 }
