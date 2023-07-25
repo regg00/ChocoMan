@@ -10,7 +10,6 @@ schema: 2.0.0
 ## SYNOPSIS
 Uninstalls a chocolatey package.
 Doesn't asks for confirmation by default.
-Just like Chocolatey, you may need admin rights to uninstall a package.
 
 ## SYNTAX
 
@@ -22,12 +21,28 @@ Uninstall-ChocoPackage [-Name] <Object> [-Force] [-AskForConfirmation] [<CommonP
 Uninstalls a chocolatey package.
 Doesn't asks for confirmation by default.
 Just like Chocolatey, you may need admin rights to uninstall a package.
+This function also accepts pipeline input.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
 Uninstall-ChocoPackage -Name vlc
+```
+
+### EXAMPLE 2
+```
+Uninstall-ChocoPackage -Name vlc -Force
+```
+
+### EXAMPLE 3
+```
+Uninstall-ChocoPackage -Name vlc -AskForConfirmation
+```
+
+### EXAMPLE 4
+```
+Get-ChocoPackage -Name vlc | Uninstall-ChocoPackage
 ```
 
 ## PARAMETERS

@@ -1,10 +1,10 @@
 Function Uninstall-ChocoPackage {
     <#
     .SYNOPSIS
-        Uninstalls a chocolatey package. Doesn't asks for confirmation by default. Just like Chocolatey, you may need admin rights to uninstall a package.
+        Uninstalls a chocolatey package. Doesn't asks for confirmation by default.
 
     .DESCRIPTION
-        Uninstalls a chocolatey package. Doesn't asks for confirmation by default. Just like Chocolatey, you may need admin rights to uninstall a package.
+        Uninstalls a chocolatey package. Doesn't asks for confirmation by default. Just like Chocolatey, you may need admin rights to uninstall a package. This function also accepts pipeline input.
 
     .PARAMETER Name
         The name of the package to uninstall.
@@ -17,6 +17,12 @@ Function Uninstall-ChocoPackage {
 
     .EXAMPLE
         Uninstall-ChocoPackage -Name vlc
+    .EXAMPLE
+        Uninstall-ChocoPackage -Name vlc -Force
+    .EXAMPLE
+        Uninstall-ChocoPackage -Name vlc -AskForConfirmation
+    .EXAMPLE
+        Get-ChocoPackage -Name vlc | Uninstall-ChocoPackage
 
     .OUTPUTS
         String
