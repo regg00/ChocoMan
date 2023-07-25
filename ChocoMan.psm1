@@ -13,5 +13,3 @@ foreach ($Function in @($Functions)) {
 }
 
 New-Alias -Name 'Add-ChocoApiKey' -Value 'Set-ChocoApiKey'
-
-Export-ModuleMember -Function $Functions.BaseName -Alias *

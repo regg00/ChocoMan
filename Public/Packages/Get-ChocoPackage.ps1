@@ -21,10 +21,10 @@ Function Get-ChocoPackage {
         7zip.install                      22.1.0            23.1.0           false
 
     .OUTPUTS
-        PSCustomObject
+        PSObject
     #>
     [CmdletBinding()]
-    [OutputType([PSCustomObject])]
+    [OutputType([String[]])]
     param(
         [String] $Name,
         [Switch] $Outdated
