@@ -41,7 +41,7 @@ Function Uninstall-ChocoPackage {
             return
         }
 
-        [Array]$Arguments = "uninstall"
+        [String[]]$Arguments = "uninstall"
 
         if ($Force) {
             $Arguments += "--force"
