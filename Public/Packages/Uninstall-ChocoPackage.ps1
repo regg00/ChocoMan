@@ -57,7 +57,6 @@ Function Uninstall-ChocoPackage {
 
     }
     end {
-        Write-Host "choco $Arguments" -ForegroundColor green
         Invoke-ChocoCmd $Arguments
     }
 
