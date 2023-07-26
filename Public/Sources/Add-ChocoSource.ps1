@@ -46,7 +46,7 @@ Function Add-ChocoSource {
     process {
         try {
 
-            Invoke-ChocoCmd $Arguments
+            Invoke-ChocoCommand $Arguments
             Return [PSCustomObject]@{
                 Name = $Name
                 Uri  = $Uri

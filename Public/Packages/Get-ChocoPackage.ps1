@@ -31,7 +31,7 @@ Function Get-ChocoPackage {
     )
 
     if (Test-ChocoInstalled) {
-        $ChocoCommandOutput = Invoke-ChocoCmd -Arguments "list" -ErrorAction SilentlyContinue
+        $ChocoCommandOutput = Invoke-ChocoCommand -Arguments "list" -ErrorAction SilentlyContinue
         if ($Outdated) {
             Return Get-ChocoOutdated
         }

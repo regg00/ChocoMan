@@ -29,7 +29,7 @@ Function Set-ChocoApiKey {
     if (Test-ChocoInstalled) {
         Try {
             if ($PSCmdlet.ShouldProcess($Source)) {
-                $ChocoApiKey = Invoke-ChocoCmd -Arguments "apikey", "-s=$Source", "-k=$ApiKey"
+                $ChocoApiKey = Invoke-ChocoCommand -Arguments "apikey", "-s=$Source", "-k=$ApiKey"
 
                 if ($ChocoApiKey -like "Nothing to change*") {
                     Write-Verbose "Nothing to change"

@@ -63,7 +63,7 @@ Function Uninstall-ChocoPackage {
 
     }
     end {
-        Invoke-ChocoCmd $Arguments
+        Invoke-ChocoCommand $Arguments
     }
 
 }

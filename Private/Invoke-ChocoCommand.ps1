@@ -1,4 +1,4 @@
-Function Invoke-ChocoCmd {
+Function Invoke-ChocoCommand {
     <#
     .SYNOPSIS
         Invokes a Chocolatey command
@@ -6,7 +6,7 @@ Function Invoke-ChocoCmd {
         Invokes a Chocolatey command
 
     .EXAMPLE
-        Invoke-ChocoCmd -Verbose -Arguments "list", "--no-progress"
+        Invoke-ChocoCommand -Verbose -Arguments "list", "--no-progress"
 
     .OUTPUTS
         PSCustomObject
