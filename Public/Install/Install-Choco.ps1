@@ -25,20 +25,32 @@ Function Install-Choco {
         Once installation is completed, the backup folder is no longer needed and can be deleted.
         Chocolatey has been installed.
     .OUTPUTS
-        String
+        PSCustomObject
     #>
     [CmdletBinding()]
-    [OutputType([String])]
+    [OutputType([PSCustomObject])]
     param(
         [String] $InstallerUrl = 'https://chocolatey.org/install.ps1'
     )
 
     if (!(Test-ChocoInstalled)) {
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString($InstallerUrl))
-        return "Chocolatey has been installed."
+        $Cmd = Get-Command "choco.exe"
+
+        return [PSCustomObject]@{
+            Name   = $Cmd.Name
+            Path   = $Cmd.Source
+            Status = "Installed"
+        }
     }
     else {
         $ChocoVersion = Get-ChocoVersion
-        return "Chocolatey is already installed. Version $ChocoVersion"
+        $Cmd = Get-Command "choco.exe"
+        return [PSCustomObject]@{
+            Name    = $Cmd.Name
+            Path    = $Cmd.Source
+            Status  = "Already installed"
+            Version = $ChocoVersion
+        }
     }
 }
