@@ -15,8 +15,7 @@ Just like Chocolatey, you may need admin rights to install a package.
 ## SYNTAX
 
 ```
-Install-ChocoPackage [-Name] <String> [-Source <String>] [-Upgrade] [-Force] [-AskForConfirmation]
- [<CommonParameters>]
+Install-ChocoPackage [-Name] <String> [-Source <String>] [-Upgrade] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,21 +41,6 @@ Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
 ```
 
 ## PARAMETERS
-
-### -AskForConfirmation
-Ask for confirmation before installing the package.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Force
 Will force the reinstallation of the package.
@@ -125,7 +109,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### String
+### PSCustomObject
 ## NOTES
 
 ## RELATED LINKS

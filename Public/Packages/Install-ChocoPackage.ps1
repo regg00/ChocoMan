@@ -18,9 +18,6 @@ Function Install-ChocoPackage {
     .PARAMETER Force
         Will force the reinstallation of the package.
 
-    .PARAMETER AskForConfirmation
-        Ask for confirmation before installing the package.
-
     .EXAMPLE
         Install-ChocoPackage -Name vlc
     .EXAMPLE
@@ -29,37 +26,50 @@ Function Install-ChocoPackage {
         Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
 
     .OUTPUTS
-        String
+        PSCustomObject
     #>
-    [OutputType([String])]
+    [OutputType([PSCustomObject])]
     param(
         [Parameter(Mandatory = $true, Position = 0)]
         [String] $Name,
         [String] $Source = "chocolatey",
         [Switch] $Upgrade = $false,
-        [Switch] $Force = $false,
-        [Switch] $AskForConfirmation = $false
+        [Switch] $Force = $false
     )
 
     if (Test-ChocoInstalled) {
-        $Command = "install"
+
         if ($Upgrade) {
-            $Command = "upgrade"
+            [String[]]$Arguments += "upgrade", "-y"
         }
         elseif ($Force) {
-            $Command = "install --force"
-        }
-
-        if ($AskForConfirmation) {
-            choco $Command $Name --source $Source
-            Write-Verbose "choco $Command $Name --source $Source"
-
+            [String[]]$Arguments += "install", "--force", "-y"
         }
         else {
-            choco $Command $Name -y --source $Source
-            Write-Verbose "choco $Command $Name -y --source $Source"
+            [String[]]$Arguments += "install", "-y"
         }
 
+        $Arguments += $Name, "--source", $Source
+
+        $CommandOutput = Invoke-ChocoCommand $Arguments
+        if ($CommandOutput.Status -eq "Success") {
+            if ($CommandOutput.RawOutput -like "*already installed.*") {
+
+                $Status = "Already installed"
+
+            }
+            elseif ($CommandOutput.RawOutput -like "*The install of $Name was successful*") {
+                $Status = "Installed"
+
+            }
+            $Version = (Get-ChocoPackage $Name).Version
+        }
+
+        Return [PSCustomObject]@{
+            Name    = $Name
+            Status  = $Status
+            Version = $Version
+        }
 
     }
     else {

@@ -46,10 +46,22 @@ Function Add-ChocoSource {
     process {
         try {
 
-            Invoke-ChocoCommand $Arguments
+            $CommandOutput = Invoke-ChocoCommand $Arguments
+
+            if ($CommandOutput.RawOutput -like "Added*") {
+                $Status = "Added"
+            }
+            elseif ($CommandOutput.RawOutput -like "Updated*") {
+                $Status = "Updated"
+            }
+            elseif ($CommandOutput.RawOutput -like "Nothing to change*") {
+                $Status = "Nothing to change"
+            }
+
             Return [PSCustomObject]@{
-                Name = $Name
-                Uri  = $Uri
+                Name   = $Name
+                Uri    = $Uri
+                Status = $Status
             }
 
         }

@@ -21,10 +21,10 @@ Function Get-ChocoPackage {
         7zip.install                      22.1.0            23.1.0           false
 
     .OUTPUTS
-        PSObject
+        PSCustomObject
     #>
     [CmdletBinding()]
-    [OutputType([String[]])]
+    [OutputType([PSCustomObject])]
     param(
         [String] $Name,
         [Switch] $Outdated
@@ -37,10 +37,10 @@ Function Get-ChocoPackage {
         }
         $Header = "Name", "Version"
         if ($Name) {
-            Return ConvertFrom-Csv $ChocoCommandOutput -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
+            Return ConvertFrom-Csv $ChocoCommandOutput.RawOutput -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
         }
         else {
-            Return ConvertFrom-Csv $ChocoCommandOutput -Delimiter '|' -Header $Header
+            Return ConvertFrom-Csv $ChocoCommandOutput.RawOutput -Delimiter '|' -Header $Header
         }
     }
 }

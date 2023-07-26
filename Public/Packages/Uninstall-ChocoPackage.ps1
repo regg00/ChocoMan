@@ -25,9 +25,9 @@ Function Uninstall-ChocoPackage {
         Get-ChocoPackage -Name vlc | Uninstall-ChocoPackage
 
     .OUTPUTS
-        String
+        PSCustomObject
     #>
-    [OutputType([String])]
+    [OutputType([PSCustomObject])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
@@ -56,6 +56,7 @@ Function Uninstall-ChocoPackage {
 
         if ($Name -is [System.Management.Automation.PSCustomObject]) {
             $Arguments += $Name.Name
+            $Name = $Name.Name
         }
         else {
             $Arguments += $Name
@@ -63,7 +64,20 @@ Function Uninstall-ChocoPackage {
 
     }
     end {
-        Invoke-ChocoCommand $Arguments
+        $CommandOutput = Invoke-ChocoCommand $Arguments
+        if ($CommandOutput.Status -eq "Error" -and $CommandOutput.RawOutput -like "*Cannot uninstall a non-existent package.*") {
+            $Status = "Cannot uninstall a non-existent package"
+        }
+        elseif ($CommandOutput.Status -eq "Success") {
+            if ($CommandOutput.RawOutput -like "*has been successfully uninstalled.*") {
+                $Status = "Uninstalled"
+            }
+        }
+
+        Return [PSCustomObject]@{
+            Name   = $Name
+            Status = $Status
+        }
     }
 
 }
