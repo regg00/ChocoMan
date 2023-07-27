@@ -49,19 +49,21 @@ Function Search-ChocoPackage {
 
     if (Test-ChocoInstalled) {
         $Header = "Name", "Version"
+        [String[]]$Arguments = "search", $Name, "--source", $Source
         Try {
 
             if ($Exact) {
-                $ChocoPackages = ConvertFrom-Csv (choco search $Name -s $Source -r --exact --nocolor) -Delimiter '|' -Header $Header
+                $Arguments += "--exact"
             }
-            else {
-                $ChocoPackages = ConvertFrom-Csv (choco search $Name -s $Source -r --nocolor) -Delimiter '|' -Header $Header
+
+            $CommandOutput = Invoke-ChocoCommand $Arguments
+            if ($CommandOutput.Status -eq "Success") {
+                Return ConvertFrom-Csv $CommandOutput.RawOutput -Delimiter '|' -Header $Header
             }
-            Return $ChocoPackages
+
         }
-        Catch [System.Management.Automation.ParameterBindingException] {
-            Write-Verbose "No package found with name '$Name' on source '$Source'."
-            Return $null
+        Catch {
+            Write-Error $_.Exception.Message
         }
     }
 

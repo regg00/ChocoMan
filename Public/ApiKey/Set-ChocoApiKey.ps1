@@ -29,17 +29,22 @@ Function Set-ChocoApiKey {
     if (Test-ChocoInstalled) {
         Try {
             if ($PSCmdlet.ShouldProcess($Source)) {
-                $ChocoApiKey = Invoke-ChocoCmd -Arguments "apikey", "-s=$Source", "-k=$ApiKey"
+                $CommandResult = Invoke-ChocoCommand -Arguments "apikey", "-s=$Source", "-k=$ApiKey"
 
-                if ($ChocoApiKey -like "Nothing to change*") {
+                if ($CommandResult.Status -ne "Success") {
+                    Write-Error "Error during processing the request. See the chocolatey log for details."
+                    Exit 1
+                }
+
+                if ($CommandResult.RawOutput -like "Nothing to change*") {
                     Write-Verbose "Nothing to change"
                     $Status = "Nothing to change"
                 }
-                elseif ($ChocoApiKey -like "Updated API key*") {
+                elseif ($CommandResult.RawOutput -like "Updated API key*") {
                     Write-Verbose "Updated API key"
                     $Status = "Updated API key"
                 }
-                elseif ($ChocoApiKey -like "Added API key*") {
+                elseif ($CommandResult.RawOutput -like "Added API key*") {
                     Write-Verbose "Added API key"
                     $Status = "Added API key"
                 }
@@ -47,7 +52,6 @@ Function Set-ChocoApiKey {
                 $Response = [PSCustomObject]@{
                     Source = $Source
                     Status = $Status
-                    ApiKey = '*****************'
                 }
 
 
@@ -57,7 +61,6 @@ Function Set-ChocoApiKey {
             $Response = [PSCustomObject]@{
                 Source = $Source
                 Status = "Error. Cannot process the request."
-                ApiKey = '*****************'
             }
         }
 

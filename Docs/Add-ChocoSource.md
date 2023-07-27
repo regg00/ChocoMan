@@ -13,8 +13,7 @@ Add a new chocolatey source.
 ## SYNTAX
 
 ```
-Add-ChocoSource [-Name] <String> [-Uri] <String> [[-UserName] <String>] [[-Password] <String>]
- [<CommonParameters>]
+Add-ChocoSource [-Name] <String> [-Uri] <String> [[-Credential] <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,8 +31,23 @@ chocolatey          https://community.chocolatey.org/api/v2/
 
 ## PARAMETERS
 
+### -Credential
+The credential to use to access the source.
+
+```yaml
+Type: PSCredential
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
-{{ Fill Name Description }}
+The name of the source.
 
 ```yaml
 Type: String
@@ -47,23 +61,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Password
-{{ Fill Password Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Uri
-{{ Fill Uri Description }}
+The Uri of the source.
 
 ```yaml
 Type: String
@@ -72,21 +71,6 @@ Aliases:
 
 Required: True
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserName
-{{ Fill UserName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

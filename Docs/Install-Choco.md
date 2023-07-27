@@ -69,7 +69,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### String
+### PSCustomObject
 ## NOTES
 
 ## RELATED LINKS

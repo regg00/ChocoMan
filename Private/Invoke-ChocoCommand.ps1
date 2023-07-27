@@ -1,4 +1,4 @@
-Function Invoke-ChocoCmd {
+Function Invoke-ChocoCommand {
     <#
     .SYNOPSIS
         Invokes a Chocolatey command
@@ -6,13 +6,13 @@ Function Invoke-ChocoCmd {
         Invokes a Chocolatey command
 
     .EXAMPLE
-        Invoke-ChocoCmd -Verbose -Arguments "list", "--no-progress"
+        Invoke-ChocoCommand -Verbose -Arguments "list", "--no-progress"
 
     .OUTPUTS
-        Array
+        PSCustomObject
     #>
     [CmdletBinding()]
-    [OutputType([array])]
+    [OutputType([PSCustomObject])]
     param(
         [String[]] $Arguments
     )
@@ -25,6 +25,17 @@ Function Invoke-ChocoCmd {
         $ChocoCommand = @(Get-Command 'choco.exe' -CommandType 'Application' -ErrorAction 'SilentlyContinue')[0]
         Write-Verbose "Command to execute: choco $($Arguments -join ' ')"
         $Output = (&$ChocoCommand $Arguments)
-        Return $Output
+
+        if ($LASTEXITCODE -eq 1 -or $LASTEXITCODE -eq -1) {
+            $Status = "Error"
+        }
+        else {
+            $Status = "Success"
+        }
+
+        Return [PSCustomObject]@{
+            RawOutput = $Output
+            Status    = $Status
+        }
     }
 }
