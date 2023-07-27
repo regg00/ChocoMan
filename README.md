@@ -44,7 +44,7 @@ First things first, you need to import it `Import-Module ChocoMan`
 
 ### Demo
 
-<img src="./Docs/demo.gif" height="350">
+<img src="./Docs/demo.gif" height="500">
 
 ### Functions
 
