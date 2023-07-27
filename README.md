@@ -42,6 +42,10 @@ Chocolatey v2.1.0 installed
 
 First things first, you need to import it `Import-Module ChocoMan`
 
+### Demo
+
+<img src="./Docs/demo.gif" height="350">
+
 ### Functions
 
 Here's the status of each functions:
