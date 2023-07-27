@@ -14,7 +14,7 @@ Doesn't asks for confirmation by default.
 ## SYNTAX
 
 ```
-Uninstall-ChocoPackage [-Name] <Object> [-Force] [-AskForConfirmation] [<CommonParameters>]
+Uninstall-ChocoPackage [-Name] <String> [-Force] [-AskForConfirmation] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,14 +81,14 @@ Accept wildcard characters: False
 The name of the package to uninstall.
 
 ```yaml
-Type: Object
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
