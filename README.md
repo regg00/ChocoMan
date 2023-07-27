@@ -12,7 +12,7 @@ Mostly for fun, but I also got tired of parsing raw output of Chocolatey command
 
 ## Installing this module
 
-This module is available in [PowerShell Gallery](https://www.powershellgallery.com/packages/PSPsat):
+This module is available in [PowerShell Gallery](https://www.powershellgallery.com/packages/ChocoMan):
 
 ```powershell
 PS C:\> Install-Module ChocoMan
