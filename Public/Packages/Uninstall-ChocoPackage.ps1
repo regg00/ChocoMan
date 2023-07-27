@@ -30,8 +30,8 @@ Function Uninstall-ChocoPackage {
     [OutputType([PSCustomObject])]
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true)]
-        $Name,
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String] $Name,
         [Switch] $Force,
         [Switch] $AskForConfirmation
     )
@@ -54,15 +54,10 @@ Function Uninstall-ChocoPackage {
     }
     process {
 
-        if ($Name -is [System.Management.Automation.PSCustomObject]) {
-            $Arguments += $Name.Name
-            $Name = $Name.Name
-        }
-        else {
-            $Arguments += $Name
-        }
+        $Arguments += $Name
 
     }
+
     end {
         $CommandOutput = Invoke-ChocoCommand $Arguments
         if ($CommandOutput.Status -eq "Error" -and $CommandOutput.RawOutput -like "*Cannot uninstall a non-existent package.*") {
