@@ -1,4 +1,4 @@
-name: Run tests suite
+name: Test and publish
 
 on:
   release:
