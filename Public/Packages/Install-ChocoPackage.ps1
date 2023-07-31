@@ -43,6 +43,7 @@ Function Install-ChocoPackage {
     )
 
     begin {
+        # TODO: Add check for admin rights
         if (-Not (Test-ChocoInstalled)) {
             Write-Error "Chocolatey is not installed. Please install it first."
             return
