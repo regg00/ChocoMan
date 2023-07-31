@@ -37,6 +37,8 @@ Function Install-ChocoPackage {
         [Switch] $Force = $false
     )
 
+    # TODO: Check if the user is admin
+
     if (Test-ChocoInstalled) {
 
         if ($Upgrade) {

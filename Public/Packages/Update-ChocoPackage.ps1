@@ -32,6 +32,9 @@ Function Update-ChocoPackage {
 
 
     begin {
+
+        # TODO: Check if the user is admin
+
         if (-Not (Test-ChocoInstalled)) {
             Write-Error "Chocolatey is not installed. Please install it first."
             return
