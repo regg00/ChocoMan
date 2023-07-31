@@ -8,18 +8,18 @@ schema: 2.0.0
 # Install-ChocoPackage
 
 ## SYNOPSIS
-Installs a chocolatey package.
+Installs a single or multiple chocolatey packages.
 Doesn't asks for confirmation by default.
 Just like Chocolatey, you may need admin rights to install a package.
 
 ## SYNTAX
 
 ```
-Install-ChocoPackage [-Name] <String> [-Source <String>] [-Upgrade] [-Force] [<CommonParameters>]
+Install-ChocoPackage [-Name] <Object> [-Source <String>] [-Upgrade] [-Force] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Installs a chocolatey package.
+Installs a single or multiple chocolatey packages.
 Doesn't asks for confirmation by default.
 Just like Chocolatey, you may need admin rights to install a package.
 
@@ -27,17 +27,29 @@ Just like Chocolatey, you may need admin rights to install a package.
 
 ### EXAMPLE 1
 ```
-Install-ChocoPackage -Name vlc
+Install-ChocoPackage -Name rufus
+Name  Status
+----  ------
+rufus Installed
 ```
 
 ### EXAMPLE 2
 ```
-Install-ChocoPackage -Name vlc -Source chocolatey
+Install-ChocoPackage -Name rufus, azcopy10
+Name     Status
+----     ------
+azcopy10 Already installed
+rufus    Already installed
 ```
 
 ### EXAMPLE 3
 ```
-Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
+Install-ChocoPackage -Name rufus -Source chocolatey
+```
+
+### EXAMPLE 4
+```
+Install-ChocoPackage -Name rufus -Source chocolatey -Upgrade
 ```
 
 ## PARAMETERS
@@ -61,14 +73,14 @@ Accept wildcard characters: False
 The name of the package to install.
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
