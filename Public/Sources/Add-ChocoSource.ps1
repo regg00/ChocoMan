@@ -31,18 +31,14 @@ Function Add-ChocoSource {
         [PSCredential] $Credential
     )
     begin {
-        # TODO: Check if the user is admin
+        if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
 
-        if (-Not (Test-ChocoInstalled)) {
-            Write-Error "Chocolatey is not installed. Please install it first."
-            return
-        }
+            [String[]]$Arguments = "source", "add", "-s=""$Uri""", "-n=$Name"
 
-        [String[]]$Arguments = "source", "add", "-s=""$Uri""", "-n=$Name"
-
-        if ($Credential) {
-            $Arguments += "-u=$($Credential.GetNetworkCredential().UserName)"
-            $Arguments += "-p=$($Credential.GetNetworkCredential().Password)"
+            if ($Credential) {
+                $Arguments += "-u=$($Credential.GetNetworkCredential().UserName)"
+                $Arguments += "-p=$($Credential.GetNetworkCredential().Password)"
+            }
         }
     }
     process {

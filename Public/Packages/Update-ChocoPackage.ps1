@@ -33,22 +33,20 @@ Function Update-ChocoPackage {
 
     begin {
 
-        # TODO: Check if the user is admin
+        if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
+            [String[]]$Arguments = "upgrade"
 
-        if (-Not (Test-ChocoInstalled)) {
-            Write-Error "Chocolatey is not installed. Please install it first."
-            return
+            if ($Force) {
+                $Arguments += "--force"
+            }
+
+            if (-Not ($AskForConfirmation)) {
+                $Arguments += "-y"
+            }
+
         }
 
-        [String[]]$Arguments = "upgrade"
 
-        if ($Force) {
-            $Arguments += "--force"
-        }
-
-        if (-Not ($AskForConfirmation)) {
-            $Arguments += "-y"
-        }
     }
     process {
         $Arguments += $Name

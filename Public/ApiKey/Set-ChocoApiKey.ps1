@@ -26,9 +26,7 @@ Function Set-ChocoApiKey {
         [String] $ApiKey
     )
 
-    # TODO: Check if the user is admin
-
-    if (Test-ChocoInstalled) {
+    if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
         Try {
             if ($PSCmdlet.ShouldProcess($Source)) {
                 $CommandResult = Invoke-ChocoCommand -Arguments "apikey", "-s=$Source", "-k=$ApiKey"

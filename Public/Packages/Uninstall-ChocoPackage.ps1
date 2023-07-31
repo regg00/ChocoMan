@@ -37,21 +37,18 @@ Function Uninstall-ChocoPackage {
     )
     begin {
 
-        # TODO: Check if the user is admin
+        if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
 
-        if (-Not (Test-ChocoInstalled)) {
-            Write-Error "Chocolatey is not installed. Please install it first."
-            return
-        }
+            [String[]]$Arguments = "uninstall"
 
-        [String[]]$Arguments = "uninstall"
+            if ($Force) {
+                $Arguments += "--force"
+            }
 
-        if ($Force) {
-            $Arguments += "--force"
-        }
+            if (-Not ($AskForConfirmation)) {
+                $Arguments += "-y"
+            }
 
-        if (-Not ($AskForConfirmation)) {
-            $Arguments += "-y"
         }
 
     }
