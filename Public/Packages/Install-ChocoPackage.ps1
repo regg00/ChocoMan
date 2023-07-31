@@ -43,24 +43,23 @@ Function Install-ChocoPackage {
     )
 
     begin {
-        # TODO: Add check for admin rights
-        if (-Not (Test-ChocoInstalled)) {
-            Write-Error "Chocolatey is not installed. Please install it first."
-            return
-        }
+        if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
 
-        if ($Upgrade) {
-            [String[]]$Arguments = "upgrade"
-        } else {
-            [String[]]$Arguments = "install"
-        }
 
-        if ($Force) {
-            $Arguments += "--force"
-        }
+            if ($Upgrade) {
+                [String[]]$Arguments = "upgrade"
+            }
+            else {
+                [String[]]$Arguments = "install"
+            }
 
-        if (-Not ($AskForConfirmation)) {
-            $Arguments += "-y"
+            if ($Force) {
+                $Arguments += "--force"
+            }
+
+            if (-Not ($AskForConfirmation)) {
+                $Arguments += "-y"
+            }
         }
     }
 
@@ -83,13 +82,14 @@ Function Install-ChocoPackage {
 
                 }
                 $Version = (Get-ChocoPackage $package).Version
-            } else {
+            }
+            else {
                 $Status = "Error"
             }
 
             [PSCustomObject]@{
-                Name   = $package
-                Status = $Status
+                Name    = $package
+                Status  = $Status
                 Version = $Version
             }
         }
