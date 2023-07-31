@@ -47,8 +47,9 @@ Function Install-ChocoPackage {
         [Switch] $Upgrade = $false,
         [Switch] $Force = $false
     )
+    begin {
 
-    if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
+        if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
             if ($Upgrade) {
                 [String[]]$Arguments += "upgrade", "-y"
             }
