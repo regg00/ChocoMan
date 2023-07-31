@@ -30,27 +30,33 @@ Function Install-ChocoPackage {
     #>
     [OutputType([PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true, Position = 0)]
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String] $Name,
         [String] $Source = "chocolatey",
         [Switch] $Upgrade = $false,
         [Switch] $Force = $false
     )
 
-    if (Test-ChocoInstalled) {
+    begin {
+        if (Test-ChocoInstalled) {
 
-        if ($Upgrade) {
-            [String[]]$Arguments += "upgrade", "-y"
-        }
-        elseif ($Force) {
-            [String[]]$Arguments += "install", "--force", "-y"
-        }
-        else {
-            [String[]]$Arguments += "install", "-y"
+            if ($Upgrade) {
+                [String[]]$Arguments += "upgrade", "-y"
+            }
+            elseif ($Force) {
+                [String[]]$Arguments += "install", "--force", "-y"
+            }
+            else {
+                [String[]]$Arguments += "install", "-y"
+            }
         }
 
+    }
+    process {
         $Arguments += $Name, "--source", $Source
 
+    }
+    end {
         $CommandOutput = Invoke-ChocoCommand $Arguments
         if ($CommandOutput.Status -eq "Success") {
             if ($CommandOutput.RawOutput -like "*already installed.*") {
@@ -72,7 +78,11 @@ Function Install-ChocoPackage {
         }
 
     }
-    else {
-        Write-Error "Chocolatey is not installed. Please install it first."
-    }
+
+
+
+
+
+
+
 }
