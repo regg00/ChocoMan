@@ -15,7 +15,14 @@ Function Confirm-IsAdmin {
     param()
     begin {}
     process {
-        Return ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
+
+        if (!([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+            Write-Error "Chocolatey needs to be run as an administrator for this action to work."
+            return $false
+        }
+        else {
+            return $true
+        }
     }
     end {}
 }
