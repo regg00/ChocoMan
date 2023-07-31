@@ -98,9 +98,14 @@ Describe 'Packages' {
         { Install-ChocoPackage -Name rufus } | Should -Not -Throw
     }
 
+    It 'Should be able to install multiple packages' {
+        { Install-ChocoPackage -Name rufus, 7zip } | Should -Not -Throw
+    }
+
     It 'Should be able to remove rufus' {
         { Uninstall-ChocoPackage -Name rufus } | Should -Not -Throw
     }
+
 
 }
 Describe 'Sources' {
