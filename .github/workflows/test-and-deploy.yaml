@@ -1,4 +1,4 @@
-name: Test and publish
+name: Test and deploy
 
 on:
   release:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-tests:
+  test:
     runs-on: windows-2019
     steps:
       - name: Checkout repo
@@ -17,8 +17,8 @@ jobs:
         run: |
           Invoke-Pester Tests\* -Passthru
 
-  publish:
-    needs: run-tests
+  deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo

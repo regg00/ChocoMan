@@ -1,4 +1,5 @@
-![Tests](https://github.com/regg00/ChocoMan/actions/workflows/run-tests.yaml/badge.svg)
+![Tests](https://github.com/regg00/ChocoMan/actions/workflows/test-and-deploy.yaml/badge.svg)
+![Docs](https://github.com/regg00/ChocoMan/actions/workflows/build-doc.yaml/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues/regg00/ChocoMan.svg)](https://github.com/regg00/ChocoMan/issues)
 
 <img src="./Docs/icon.png" height="200">
