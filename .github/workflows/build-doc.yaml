@@ -2,6 +2,14 @@ name: Build documentation
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "Docs/**"
 
 jobs:
   build-doc:
@@ -22,6 +30,7 @@ jobs:
           New-MarkdownHelp -module ChocoMan -OutputFolder .\Docs\ -Force -AlphabeticParamsOrder
 
       - name: Commit and push changes
+        if: github.event_name == 'push'
         run: |
           git config --global user.name "CI"
           git config --global user.email "regg00@gmail.com"
