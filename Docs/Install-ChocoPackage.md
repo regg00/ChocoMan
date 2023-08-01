@@ -8,18 +8,19 @@ schema: 2.0.0
 # Install-ChocoPackage
 
 ## SYNOPSIS
-Installs a single or multiple chocolatey packages.
+Installs a chocolatey package.
 Doesn't asks for confirmation by default.
 Just like Chocolatey, you may need admin rights to install a package.
 
 ## SYNTAX
 
 ```
-Install-ChocoPackage [-Name] <Object> [-Source <String>] [-Upgrade] [-Force] [<CommonParameters>]
+Install-ChocoPackage [-Name] <String[]> [-Source <String>] [-Upgrade] [-Force] [-AskForConfirmation]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Installs a single or multiple chocolatey packages.
+Installs a chocolatey package.
 Doesn't asks for confirmation by default.
 Just like Chocolatey, you may need admin rights to install a package.
 
@@ -27,32 +28,35 @@ Just like Chocolatey, you may need admin rights to install a package.
 
 ### EXAMPLE 1
 ```
-Install-ChocoPackage -Name rufus
-Name  Status
-----  ------
-rufus Installed
+Install-ChocoPackage -Name vlc
 ```
 
 ### EXAMPLE 2
 ```
-Install-ChocoPackage -Name rufus, azcopy10
-Name     Status
-----     ------
-azcopy10 Already installed
-rufus    Already installed
+Install-ChocoPackage -Name vlc -Source chocolatey
 ```
 
 ### EXAMPLE 3
 ```
-Install-ChocoPackage -Name rufus -Source chocolatey
-```
-
-### EXAMPLE 4
-```
-Install-ChocoPackage -Name rufus -Source chocolatey -Upgrade
+Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
 ```
 
 ## PARAMETERS
+
+### -AskForConfirmation
+Ask for confirmation before uninstalling the package.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Force
 Will force the reinstallation of the package.
@@ -71,9 +75,10 @@ Accept wildcard characters: False
 
 ### -Name
 The name of the package to install.
+You can specify more than one package.
 
 ```yaml
-Type: Object
+Type: String[]
 Parameter Sets: (All)
 Aliases:
 
