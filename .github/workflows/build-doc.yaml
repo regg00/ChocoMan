@@ -13,6 +13,7 @@ jobs:
       - name: Build documentation
         shell: pwsh
         run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
           Install-Module -Name platyPS -Scope CurrentUser
           Import-Module platyPS
           Import-Module .\ChocoMan.psd1 -Force
