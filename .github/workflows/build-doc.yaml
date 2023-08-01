@@ -1,0 +1,24 @@
+name: Build documentation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-doc:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Build documentation
+        shell: pwsh
+        run: |
+          Import-Module .\ChocoMan.psd1 -Force
+          New-MarkdownHelp -module ChocoMan -OutputFolder .\Docs\ -Force -AlphabeticParamsOrder
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "CI"
+          git config --global user.email "regg00@gmail.com"
+          git commit -a -m "Updated documentation"
+          git push
