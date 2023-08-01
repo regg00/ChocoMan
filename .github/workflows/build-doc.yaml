@@ -13,6 +13,8 @@ jobs:
       - name: Build documentation
         shell: pwsh
         run: |
+          Install-Module -Name platyPS -Scope CurrentUser
+          Import-Module platyPS
           Import-Module .\ChocoMan.psd1 -Force
           New-MarkdownHelp -module ChocoMan -OutputFolder .\Docs\ -Force -AlphabeticParamsOrder
 
