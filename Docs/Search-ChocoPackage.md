@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Search for a chocolatey package.
-Returns all packages if no name is specified.
+If no name is specified this will return all available packages.
 
 ## SYNTAX
 
@@ -18,8 +18,8 @@ Search-ChocoPackage [[-Name] <String>] [-Source <String>] [-Exact] [<CommonParam
 ```
 
 ## DESCRIPTION
-Search for a chocolatey package.
-Returns all packages if no name specified.
+Search for a chocolatey package. 
+If no name is specified this will return all available packages.
 
 ## EXAMPLES
 
@@ -53,6 +53,8 @@ Name Version
 vlc  3.0.18
 ```
 
+### EXAMPLE 4
+```
 Search-ChocoPackage
 Name                Version
 ----                -------
@@ -81,6 +83,7 @@ Accept wildcard characters: False
 
 ### -Name
 The name of the package to search for.
+Omit to return all available packages.
 
 ```yaml
 Type: String
@@ -96,6 +99,7 @@ Accept wildcard characters: False
 
 ### -Source
 Search on a specific source.
+Defaults to the official Chocolatey repository.
 
 ```yaml
 Type: String
