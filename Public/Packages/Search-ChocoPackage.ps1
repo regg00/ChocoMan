@@ -1,13 +1,13 @@
 Function Search-ChocoPackage {
     <#
     .SYNOPSIS
-        Search for a chocolatey package.
+        Search for a chocolatey package. If no name is specified this will return all available packages.
     .DESCRIPTION
-        Search for a chocolatey package.
+        Search for a chocolatey package.  If no name is specified this will return all available packages.
     .PARAMETER Name
-        The name of the package to search for.
+        The name of the package to search for. Omit to return all available packages.
     .PARAMETER Source
-        Search on a specific source.
+        Search on a specific source. Defaults to the official Chocolatey repository.
     .PARAMETER Exact
         Search for an exact match.
 
@@ -28,11 +28,22 @@ Function Search-ChocoPackage {
         vlc.install         3.0.18
         vlc.portable        3.0.18
         vlc-nightly         4.0.0.20230713
+
     .EXAMPLE
         Search-ChocoPackage -Name "vlc" -Source "chocolatey" -Exact
         Name Version
         ---- -------
         vlc  3.0.18
+
+    .EXAMPLE
+        Search-ChocoPackage
+        Name                Version
+        ----                -------
+        vlc                 3.0.18
+        vlc.install         3.0.18
+        ...                 ...
+        ...                 ...
+
     .OUTPUTS
         PSCustomObject
 
@@ -40,9 +51,8 @@ Function Search-ChocoPackage {
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true, Position = 0)]
+        [Parameter(Position = 0)]
         [String] $Name,
-
         [String] $Source = "chocolatey",
         [Switch] $Exact
     )

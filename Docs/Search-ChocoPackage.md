@@ -9,15 +9,17 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Search for a chocolatey package.
+Returns all packages if no name is specified.
 
 ## SYNTAX
 
 ```
-Search-ChocoPackage [-Name] <String> [-Source <String>] [-Exact] [<CommonParameters>]
+Search-ChocoPackage [[-Name] <String>] [-Source <String>] [-Exact] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Search for a chocolatey package.
+Returns all packages if no name specified.
 
 ## EXAMPLES
 
@@ -51,6 +53,15 @@ Name Version
 vlc  3.0.18
 ```
 
+Search-ChocoPackage
+Name                Version
+----                -------
+vlc                 3.0.18
+vlc.install         3.0.18
+...                 ...
+...                 ...
+```
+
 ## PARAMETERS
 
 ### -Exact
@@ -76,7 +87,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
