@@ -33,25 +33,35 @@ Function Format-ChocoCommandOutput {
             $Version = $null
         }
 
-        if ($Status -eq "Success") {
 
-            # If the package was already installed
-            if ($Output -match "^ - $Name - $Name $Version already installed.$") {
-                $Status = "Already installed"
-            }
 
-            # If the installation was successfull
-            elseif ($Output -match "^ The install of $Name was successful.$") {
-                $Status = "Installed"
-            }
-            else {
-                $Status = "Error"
-            }
-
+        # If the package was already installed
+        if ($Output -match "^ - $Name - $Name $Version already installed.$") {
+            $Status = "Already installed"
         }
+
+        # If the installation was successfull
+        elseif ($Output -match "^ The install of $Name was successful.$") {
+            $Status = "Installed"
+        }
+
+        # Uninstallation was successfull
+        elseif ($Output -match "^ $Name has been successfully uninstalled.$") {
+            $Status = "Uninstalled"
+        }
+
+        # Tried to uninstalled a non-existent package
+        elseif ($Output -match "^ - $Name - $Name is not installed. Cannot uninstall a non-existent package.$") {
+            $Status = "Non-existent package"
+        }
+
+
         else {
-            $Status = "Error"
+            $Status = "Unhandled"
         }
+
+
+
         [PSCustomObject]@{
             Name    = $Name
             Status  = $Status

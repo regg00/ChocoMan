@@ -58,19 +58,7 @@ Function Uninstall-ChocoPackage {
 
             $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
 
-            if ($CommandOutput.Status -eq "Error" -and $CommandOutput.RawOutput -like "*Cannot uninstall a non-existent package.*") {
-                $Status = "Cannot uninstall a non-existent package"
-            }
-            elseif ($CommandOutput.Status -eq "Success") {
-                if ($CommandOutput.RawOutput -like "*has been successfully uninstalled.*") {
-                    $Status = "Uninstalled"
-                }
-            }
-
-            [PSCustomObject]@{
-                Name   = $package
-                Status = $Status
-            }
+            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
         }
 
     }
