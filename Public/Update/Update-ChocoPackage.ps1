@@ -50,24 +50,16 @@ Function Update-ChocoPackage {
     }
     process {
         $Arguments += $Name
-    }
-    end {
-        $CommandOutput = Invoke-ChocoCommand $Arguments
-        if ($CommandOutput.Status -eq "Error" -and $CommandOutput.RawOutput -like "*Cannot uninstall a non-existent package.*") {
-            $Status = "Cannot uninstall a non-existent package"
-        }
-        elseif ($CommandOutput.Status -eq "Success") {
-            if ($CommandOutput.RawOutput -like "*The upgrade of * was successful.*") {
-                $Status = "Upgraded"
-            }
-        }
 
-        Return [PSCustomObject]@{
-            Name   = $Name
-            Status = $Status
+        foreach ($package in $Name) {
+
+            $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
+
+            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
         }
 
     }
+    end {    }
 
 
 }

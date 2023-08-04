@@ -17,7 +17,7 @@ Mostly for fun, but I also got tired of parsing raw output of Chocolatey command
 This module is available in [PowerShell Gallery](https://www.powershellgallery.com/packages/ChocoMan):
 
 ```powershell
-PS C:\> Install-Module ChocoMan
+Install-Module ChocoMan
 ```
 
 Or, download it from here and save all of the files somewhere in your `$PSModulePath`.
