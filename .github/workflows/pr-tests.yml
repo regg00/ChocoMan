@@ -1,0 +1,17 @@
+name: Run tests on PR
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  tests:
+    runs-on: windows-2019
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Perform Pester tests
+        shell: pwsh
+        run: |
+          Invoke-Pester Tests\* -Passthru
