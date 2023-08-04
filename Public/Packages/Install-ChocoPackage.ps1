@@ -71,27 +71,8 @@ Function Install-ChocoPackage {
 
             $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
 
-            if ($CommandOutput.Status -eq "Success") {
-                if ($CommandOutput.RawOutput -like "*already installed.*") {
 
-                    $Status = "Already installed"
-
-                }
-                elseif ($CommandOutput.RawOutput -like "*The install of $package was successful*") {
-                    $Status = "Installed"
-
-                }
-                $Version = (Get-ChocoPackage $package).Version
-            }
-            else {
-                $Status = "Error"
-            }
-
-            [PSCustomObject]@{
-                Name    = $package
-                Status  = $Status
-                Version = $Version
-            }
+            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
         }
     }
 
