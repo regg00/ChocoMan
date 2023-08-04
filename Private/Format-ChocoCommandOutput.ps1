@@ -55,6 +55,16 @@ Function Format-ChocoCommandOutput {
             $Status = "Non-existent package"
         }
 
+        # Upgrade successfull
+        elseif ($Output -match "^ The upgrade of $Name was successful.$") {
+            $Status = "Non-existent package"
+        }
+
+        # Package already up-to-date
+        elseif ($Output -match "^Chocolatey upgraded 0/1 packages.$") {
+            $Status = "Non-existent package"
+        }
+
 
         else {
             $Status = "Unhandled"
