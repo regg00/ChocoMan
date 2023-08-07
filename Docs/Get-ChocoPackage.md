@@ -25,10 +25,10 @@ Returns all packages if no name is specified.
 
 ### EXAMPLE 1
 ```
-Get-ChocoPackage -Name vlc
+Get-ChocoPackage -Name rufus
 Name Version
 ---- -------
-vlc  3.0.18
+rufus  3.0.18
 ```
 
 ### EXAMPLE 2

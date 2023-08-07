@@ -25,32 +25,32 @@ If no name is specified this will return all available packages.
 
 ### EXAMPLE 1
 ```
-Search-ChocoPackage -Name "vlc"
+Search-ChocoPackage -Name "rufus"
 Name                Version
 ----                -------
-vlc                 3.0.18
-vlc.install         3.0.18
-vlc.portable        3.0.18
-vlc-nightly         4.0.0.20230713
+rufus                 3.0.18
+rufus.install         3.0.18
+rufus.portable        3.0.18
+rufus-nightly         4.0.0.20230713
 ```
 
 ### EXAMPLE 2
 ```
-Search-ChocoPackage -Name "vlc" -Source "chocolatey"
+Search-ChocoPackage -Name "rufus" -Source "chocolatey"
 Name                Version
 ----                -------
-vlc                 3.0.18
-vlc.install         3.0.18
-vlc.portable        3.0.18
-vlc-nightly         4.0.0.20230713
+rufus                 3.0.18
+rufus.install         3.0.18
+rufus.portable        3.0.18
+rufus-nightly         4.0.0.20230713
 ```
 
 ### EXAMPLE 3
 ```
-Search-ChocoPackage -Name "vlc" -Source "chocolatey" -Exact
+Search-ChocoPackage -Name "rufus" -Source "chocolatey" -Exact
 Name Version
 ---- -------
-vlc  3.0.18
+rufus  3.0.18
 ```
 
 ### EXAMPLE 4
@@ -58,8 +58,8 @@ vlc  3.0.18
 Search-ChocoPackage
 Name                Version
 ----                -------
-vlc                 3.0.18
-vlc.install         3.0.18
+rufus                 3.0.18
+rufus.install         3.0.18
 ...                 ...
 ...                 ...
 ```

@@ -15,7 +15,7 @@ Just like Chocolatey, you may need admin rights to install a package.
 ## SYNTAX
 
 ```
-Update-ChocoPackage [-Name] <String> [-Source <String>] [-Upgrade] [-Force] [<CommonParameters>]
+Update-ChocoPackage [-Name] <String> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,12 +27,28 @@ Just like Chocolatey, you may need admin rights to install a package.
 
 ### EXAMPLE 1
 ```
-Update-ChocoPackage -Name vlc
+Update-ChocoPackage -Name rufus
+Name  Version Status
+----  ------- ------
+rufus         Unhandled
 ```
 
 ### EXAMPLE 2
 ```
-Update-ChocoPackage -Name vlc -Force
+Update-ChocoPackage -Name rufus -WhatIf
+What if: Performing the operation "Install-ChocoPackage" on target "rufus".
+```
+
+Name  Version Status
+----  ------- ------
+rufus         Unhandled
+
+### EXAMPLE 3
+```
+Update-ChocoPackage -Name rufus -Force
+Name  Version Status
+----  ------- ------
+rufus         Unhandled
 ```
 
 ## PARAMETERS
@@ -67,32 +83,33 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Source
-{{ Fill Source Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Chocolatey
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Upgrade
-{{ Fill Upgrade Description }}
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

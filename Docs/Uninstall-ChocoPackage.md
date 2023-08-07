@@ -14,7 +14,8 @@ Doesn't asks for confirmation by default.
 ## SYNTAX
 
 ```
-Uninstall-ChocoPackage [-Name] <String[]> [-Force] [-AskForConfirmation] [<CommonParameters>]
+Uninstall-ChocoPackage [-Name] <String[]> [-Force] [-AskForConfirmation] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,23 +28,45 @@ This function also accepts pipeline input.
 
 ### EXAMPLE 1
 ```
-Uninstall-ChocoPackage -Name vlc
+Uninstall-ChocoPackage -Name rufus
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Uninstalled
 ```
 
 ### EXAMPLE 2
 ```
-Uninstall-ChocoPackage -Name vlc -Force
+Uninstall-ChocoPackage -Name rufus -Force
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Uninstalled
 ```
 
 ### EXAMPLE 3
 ```
-Uninstall-ChocoPackage -Name vlc -AskForConfirmation
+Uninstall-ChocoPackage -Name rufus -AskForConfirmation
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Uninstalled
 ```
 
 ### EXAMPLE 4
 ```
-Get-ChocoPackage -Name vlc | Uninstall-ChocoPackage
+Get-ChocoPackage -Name rufus | Uninstall-ChocoPackage
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Uninstalled
 ```
+
+### EXAMPLE 5
+```
+Uninstall-ChocoPackage -Name rufus -WhatIf
+What if: Performing the operation "Uninstall-ChocoPackage" on target "rufus".
+```
+
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Would be uninstalled
 
 ## PARAMETERS
 
@@ -90,6 +113,37 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

@@ -15,8 +15,8 @@ Just like Chocolatey, you may need admin rights to install a package.
 ## SYNTAX
 
 ```
-Install-ChocoPackage [-Name] <String[]> [-Source <String>] [-Upgrade] [-Force] [-AskForConfirmation]
- [<CommonParameters>]
+Install-ChocoPackage [-Name] <String[]> [-Source <String>] [-Upgrade] [-Force] [-AskForConfirmation] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,18 +28,37 @@ Just like Chocolatey, you may need admin rights to install a package.
 
 ### EXAMPLE 1
 ```
-Install-ChocoPackage -Name vlc
+Install-ChocoPackage -Name rufus
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Installed
 ```
 
 ### EXAMPLE 2
 ```
-Install-ChocoPackage -Name vlc -Source chocolatey
+Install-ChocoPackage -Name rufus -Source chocolatey
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Installed
 ```
 
 ### EXAMPLE 3
 ```
-Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
+Install-ChocoPackage -Name rufus -Source chocolatey -Upgrade
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Installed
 ```
+
+### EXAMPLE 4
+```
+Install-ChocoPackage -Name rufus -WhatIf
+What if: Performing the operation "Install-ChocoPackage" on target "rufus".
+```
+
+Name  Version Status
+----  ------- ------
+rufus 4.2.0   Chocolatey would have used NuGet to install packages (if they are not already installed)
 
 ## PARAMETERS
 
@@ -115,6 +134,37 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
