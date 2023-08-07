@@ -17,15 +17,32 @@ Function Uninstall-ChocoPackage {
 
     .EXAMPLE
         Uninstall-ChocoPackage -Name rufus
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
     .EXAMPLE
         Uninstall-ChocoPackage -Name rufus -Force
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
     .EXAMPLE
         Uninstall-ChocoPackage -Name rufus -AskForConfirmation
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
     .EXAMPLE
         Get-ChocoPackage -Name rufus | Uninstall-ChocoPackage
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
 
     .EXAMPLE
         Uninstall-ChocoPackage -Name rufus -WhatIf
+        What if: Performing the operation "Uninstall-ChocoPackage" on target "rufus".
+
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Would be uninstalled
 
     .OUTPUTS
         PSCustomObject

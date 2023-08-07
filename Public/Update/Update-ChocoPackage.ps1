@@ -14,10 +14,21 @@ Function Update-ChocoPackage {
 
     .EXAMPLE
         Update-ChocoPackage -Name rufus
+        Name  Version Status
+        ----  ------- ------
+        rufus         Unhandled
     .EXAMPLE
         Update-ChocoPackage -Name rufus -WhatIf
+        What if: Performing the operation "Install-ChocoPackage" on target "rufus".
+
+        Name  Version Status
+        ----  ------- ------
+        rufus         Unhandled
     .EXAMPLE
         Update-ChocoPackage -Name rufus -Force
+        Name  Version Status
+        ----  ------- ------
+        rufus         Unhandled
 
     .OUTPUTS
         PSCustomObject

@@ -23,12 +23,26 @@ Function Install-ChocoPackage {
 
     .EXAMPLE
         Install-ChocoPackage -Name rufus
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Installed
     .EXAMPLE
         Install-ChocoPackage -Name rufus -Source chocolatey
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Installed
     .EXAMPLE
         Install-ChocoPackage -Name rufus -Source chocolatey -Upgrade
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Installed
     .EXAMPLE
         Install-ChocoPackage -Name rufus -WhatIf
+        What if: Performing the operation "Install-ChocoPackage" on target "rufus".
+
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Chocolatey would have used NuGet to install packages (if they are not already installed)
 
     .OUTPUTS
         PSCustomObject
