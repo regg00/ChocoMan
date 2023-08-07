@@ -45,7 +45,12 @@ Function Add-ChocoSource {
         try {
 
             if ($PSCmdlet.ShouldProcess($Name, "Add-ChocoSource")) {
+
                 $CommandOutput = Invoke-ChocoCommand $Arguments
+
+
+
+
 
                 if ($CommandOutput.RawOutput -like "Added*") {
                     $Status = "Added"
@@ -55,6 +60,20 @@ Function Add-ChocoSource {
                 }
                 elseif ($CommandOutput.RawOutput -like "Nothing to change*") {
                     $Status = "Nothing to change"
+                }
+
+                Return [PSCustomObject]@{
+                    Name   = $Name
+                    Uri    = $Uri
+                    Status = $Status
+                }
+            }
+
+            if ($WhatIfPreference) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + "--whatif")
+
+                if ($CommandOutput.RawOutput -like "Would have made a change to the configuration.") {
+                    $Status = "Would have made a change to the configuration."
                 }
 
                 Return [PSCustomObject]@{
