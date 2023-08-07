@@ -13,11 +13,11 @@ Function Update-ChocoPackage {
         Will force the reinstallation of the package.
 
     .EXAMPLE
-        Update-ChocoPackage -Name vlc
+        Update-ChocoPackage -Name rufus
     .EXAMPLE
-        Update-ChocoPackage -Name vlc -WhatIf
+        Update-ChocoPackage -Name rufus -WhatIf
     .EXAMPLE
-        Update-ChocoPackage -Name vlc -Force
+        Update-ChocoPackage -Name rufus -Force
 
     .OUTPUTS
         PSCustomObject

@@ -22,13 +22,13 @@ Function Install-ChocoPackage {
         Ask for confirmation before uninstalling the package.
 
     .EXAMPLE
-        Install-ChocoPackage -Name vlc
+        Install-ChocoPackage -Name rufus
     .EXAMPLE
-        Install-ChocoPackage -Name vlc -Source chocolatey
+        Install-ChocoPackage -Name rufus -Source chocolatey
     .EXAMPLE
-        Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
+        Install-ChocoPackage -Name rufus -Source chocolatey -Upgrade
     .EXAMPLE
-        Install-ChocoPackage -Name vlc -WhatIf
+        Install-ChocoPackage -Name rufus -WhatIf
 
     .OUTPUTS
         PSCustomObject

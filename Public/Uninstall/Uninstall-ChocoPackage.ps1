@@ -16,16 +16,16 @@ Function Uninstall-ChocoPackage {
         Ask for confirmation before uninstalling the package.
 
     .EXAMPLE
-        Uninstall-ChocoPackage -Name vlc
+        Uninstall-ChocoPackage -Name rufus
     .EXAMPLE
-        Uninstall-ChocoPackage -Name vlc -Force
+        Uninstall-ChocoPackage -Name rufus -Force
     .EXAMPLE
-        Uninstall-ChocoPackage -Name vlc -AskForConfirmation
+        Uninstall-ChocoPackage -Name rufus -AskForConfirmation
     .EXAMPLE
-        Get-ChocoPackage -Name vlc | Uninstall-ChocoPackage
+        Get-ChocoPackage -Name rufus | Uninstall-ChocoPackage
 
     .EXAMPLE
-        Uninstall-ChocoPackage -Name vlc -WhatIf
+        Uninstall-ChocoPackage -Name rufus -WhatIf
 
     .OUTPUTS
         PSCustomObject
