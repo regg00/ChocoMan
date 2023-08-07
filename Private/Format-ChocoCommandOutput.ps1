@@ -57,7 +57,7 @@ Function Format-ChocoCommandOutput {
 
         # Upgrade successfull
         elseif ($Output -match "^ The upgrade of $Name was successful.$") {
-            $Status = "Non-existent package"
+            $Status = "Upgraded"
         }
 
         # Package already up-to-date
