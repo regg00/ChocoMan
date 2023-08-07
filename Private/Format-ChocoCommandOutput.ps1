@@ -17,8 +17,7 @@ Function Format-ChocoCommandOutput {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
         [PSCustomObject] $OutputObject,
-        [String] $Name,
-        [String] $Source
+        [String] $Name
     )
     begin {
         $Status = $OutputObject.Status
