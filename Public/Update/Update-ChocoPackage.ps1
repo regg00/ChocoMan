@@ -15,18 +15,18 @@ Function Update-ChocoPackage {
     .EXAMPLE
         Update-ChocoPackage -Name vlc
     .EXAMPLE
+        Update-ChocoPackage -Name vlc -WhatIf
+    .EXAMPLE
         Update-ChocoPackage -Name vlc -Force
 
     .OUTPUTS
         PSCustomObject
     #>
     [OutputType([PSCustomObject])]
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String] $Name,
-        [String] $Source = "chocolatey",
-        [Switch] $Upgrade = $false,
         [Switch] $Force = $false
     )
 
@@ -53,9 +53,17 @@ Function Update-ChocoPackage {
 
         foreach ($package in $Name) {
 
-            $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
+            if ($PSCmdlet.ShouldProcess($Name, "Install-ChocoPackage")) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
 
-            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+            }
+
+            if ($WhatIfPreference) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package + "--whatif")
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+
+            }
         }
 
     }
