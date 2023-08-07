@@ -19,7 +19,7 @@ Function Add-ChocoSource {
     .OUTPUTS
         PSCustomObject
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType([PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
@@ -44,22 +44,24 @@ Function Add-ChocoSource {
     process {
         try {
 
-            $CommandOutput = Invoke-ChocoCommand $Arguments
+            if ($PSCmdlet.ShouldProcess($Name, "Add-ChocoSource")) {
+                $CommandOutput = Invoke-ChocoCommand $Arguments
 
-            if ($CommandOutput.RawOutput -like "Added*") {
-                $Status = "Added"
-            }
-            elseif ($CommandOutput.RawOutput -like "Updated*") {
-                $Status = "Updated"
-            }
-            elseif ($CommandOutput.RawOutput -like "Nothing to change*") {
-                $Status = "Nothing to change"
-            }
+                if ($CommandOutput.RawOutput -like "Added*") {
+                    $Status = "Added"
+                }
+                elseif ($CommandOutput.RawOutput -like "Updated*") {
+                    $Status = "Updated"
+                }
+                elseif ($CommandOutput.RawOutput -like "Nothing to change*") {
+                    $Status = "Nothing to change"
+                }
 
-            Return [PSCustomObject]@{
-                Name   = $Name
-                Uri    = $Uri
-                Status = $Status
+                Return [PSCustomObject]@{
+                    Name   = $Name
+                    Uri    = $Uri
+                    Status = $Status
+                }
             }
 
         }
