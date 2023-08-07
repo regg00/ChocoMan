@@ -22,16 +22,33 @@ Function Install-ChocoPackage {
         Ask for confirmation before uninstalling the package.
 
     .EXAMPLE
-        Install-ChocoPackage -Name vlc
+        Install-ChocoPackage -Name rufus
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Installed
     .EXAMPLE
-        Install-ChocoPackage -Name vlc -Source chocolatey
+        Install-ChocoPackage -Name rufus -Source chocolatey
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Installed
     .EXAMPLE
-        Install-ChocoPackage -Name vlc -Source chocolatey -Upgrade
+        Install-ChocoPackage -Name rufus -Source chocolatey -Upgrade
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Installed
+    .EXAMPLE
+        Install-ChocoPackage -Name rufus -WhatIf
+        What if: Performing the operation "Install-ChocoPackage" on target "rufus".
+
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Chocolatey would have used NuGet to install packages (if they are not already installed)
 
     .OUTPUTS
         PSCustomObject
     #>
     [OutputType([PSCustomObject])]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String[]] $Name,
@@ -44,7 +61,6 @@ Function Install-ChocoPackage {
 
     begin {
         if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
-
 
             if ($Upgrade) {
                 [String[]]$Arguments = "upgrade"
@@ -69,10 +85,20 @@ Function Install-ChocoPackage {
 
         foreach ($package in $Name) {
 
-            $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
+
+            if ($PSCmdlet.ShouldProcess($Name, "Install-ChocoPackage")) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+            }
+
+            if ($WhatIfPreference) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package + "--whatif")
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+
+            }
 
 
-            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+
         }
     }
 

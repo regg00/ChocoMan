@@ -13,20 +13,31 @@ Function Update-ChocoPackage {
         Will force the reinstallation of the package.
 
     .EXAMPLE
-        Update-ChocoPackage -Name vlc
+        Update-ChocoPackage -Name rufus
+        Name  Version Status
+        ----  ------- ------
+        rufus         Unhandled
     .EXAMPLE
-        Update-ChocoPackage -Name vlc -Force
+        Update-ChocoPackage -Name rufus -WhatIf
+        What if: Performing the operation "Install-ChocoPackage" on target "rufus".
+
+        Name  Version Status
+        ----  ------- ------
+        rufus         Unhandled
+    .EXAMPLE
+        Update-ChocoPackage -Name rufus -Force
+        Name  Version Status
+        ----  ------- ------
+        rufus         Unhandled
 
     .OUTPUTS
         PSCustomObject
     #>
     [OutputType([PSCustomObject])]
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String] $Name,
-        [String] $Source = "chocolatey",
-        [Switch] $Upgrade = $false,
         [Switch] $Force = $false
     )
 
@@ -53,9 +64,17 @@ Function Update-ChocoPackage {
 
         foreach ($package in $Name) {
 
-            $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
+            if ($PSCmdlet.ShouldProcess($Name, "Install-ChocoPackage")) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
 
-            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+            }
+
+            if ($WhatIfPreference) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package + "--whatif")
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+
+            }
         }
 
     }

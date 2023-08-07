@@ -16,19 +16,39 @@ Function Uninstall-ChocoPackage {
         Ask for confirmation before uninstalling the package.
 
     .EXAMPLE
-        Uninstall-ChocoPackage -Name vlc
+        Uninstall-ChocoPackage -Name rufus
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
     .EXAMPLE
-        Uninstall-ChocoPackage -Name vlc -Force
+        Uninstall-ChocoPackage -Name rufus -Force
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
     .EXAMPLE
-        Uninstall-ChocoPackage -Name vlc -AskForConfirmation
+        Uninstall-ChocoPackage -Name rufus -AskForConfirmation
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
     .EXAMPLE
-        Get-ChocoPackage -Name vlc | Uninstall-ChocoPackage
+        Get-ChocoPackage -Name rufus | Uninstall-ChocoPackage
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Uninstalled
+
+    .EXAMPLE
+        Uninstall-ChocoPackage -Name rufus -WhatIf
+        What if: Performing the operation "Uninstall-ChocoPackage" on target "rufus".
+
+        Name  Version Status
+        ----  ------- ------
+        rufus 4.2.0   Would be uninstalled
 
     .OUTPUTS
         PSCustomObject
     #>
     [OutputType([PSCustomObject])]
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String[]] $Name,
@@ -56,9 +76,17 @@ Function Uninstall-ChocoPackage {
 
         foreach ($package in $Name) {
 
-            $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
+            if ($PSCmdlet.ShouldProcess($Name, "Uninstall-ChocoPackage")) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
 
-            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+            }
+
+            if ($WhatIfPreference) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package + "--whatif")
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+
+            }
         }
 
     }

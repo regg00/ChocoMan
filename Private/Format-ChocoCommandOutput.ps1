@@ -17,8 +17,7 @@ Function Format-ChocoCommandOutput {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
         [PSCustomObject] $OutputObject,
-        [String] $Name,
-        [String] $Source
+        [String] $Name
     )
     begin {
         $Status = $OutputObject.Status
@@ -27,16 +26,17 @@ Function Format-ChocoCommandOutput {
     process {
 
         try {
-            $Version = ($CommandOutput.RawOutput | Select-String 'v\d.\d.\d').matches[0].value
+            $Version = (($CommandOutput.RawOutput | Select-String 'v\d+.\d+.\d+').matches[0].value).Substring(1)
         }
         catch {
             $Version = $null
         }
 
+        Write-Verbose (Out-String -InputObject $Output)
 
 
         # If the package was already installed
-        if ($Output -match "^ - $Name - $Name $Version already installed.$") {
+        if ($Output -match "^ - $Name - $Name v$Version already installed.$") {
             $Status = "Already installed"
         }
 
@@ -65,6 +65,18 @@ Function Format-ChocoCommandOutput {
             $Status = "Non-existent package"
         }
 
+        # Whatif on installed package
+        elseif ($Output -match "^Chocolatey would have used NuGet to install packages \(if they are not already installed\):$") {
+            $Status = "Chocolatey would have used NuGet to install packages (if they are not already installed)"
+        }
+
+        # Whatif uninstalling an installed package
+        elseif ($Output -match "^Would have uninstalled $Name") {
+            $Status = "Would be uninstalled"
+        }
+
+
+
 
         else {
             $Status = "Unhandled"
@@ -74,11 +86,9 @@ Function Format-ChocoCommandOutput {
 
         [PSCustomObject]@{
             Name    = $Name
-            Status  = $Status
             Version = $Version
+            Status  = $Status
         }
-
-
 
     }
     end {}

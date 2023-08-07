@@ -9,10 +9,10 @@ Function Get-ChocoPackage {
     .PARAMETER Outdated
         Get only outdated packages.
     .EXAMPLE
-        Get-ChocoPackage -Name vlc
+        Get-ChocoPackage -Name rufus
         Name Version
         ---- -------
-        vlc  3.0.18
+        rufus  3.0.18
     .EXAMPLE
         Get-ChocoPackage -Outdated
         Name                              CurrentVersion    AvailableVersion Pinned

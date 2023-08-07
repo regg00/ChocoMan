@@ -19,7 +19,7 @@ Function Add-ChocoSource {
     .OUTPUTS
         PSCustomObject
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType([PSCustomObject])]
     param(
         [Parameter(Mandatory = $true)]
@@ -44,22 +44,43 @@ Function Add-ChocoSource {
     process {
         try {
 
-            $CommandOutput = Invoke-ChocoCommand $Arguments
+            if ($PSCmdlet.ShouldProcess($Name, "Add-ChocoSource")) {
 
-            if ($CommandOutput.RawOutput -like "Added*") {
-                $Status = "Added"
-            }
-            elseif ($CommandOutput.RawOutput -like "Updated*") {
-                $Status = "Updated"
-            }
-            elseif ($CommandOutput.RawOutput -like "Nothing to change*") {
-                $Status = "Nothing to change"
+                $CommandOutput = Invoke-ChocoCommand $Arguments
+
+
+
+
+
+                if ($CommandOutput.RawOutput -like "Added*") {
+                    $Status = "Added"
+                }
+                elseif ($CommandOutput.RawOutput -like "Updated*") {
+                    $Status = "Updated"
+                }
+                elseif ($CommandOutput.RawOutput -like "Nothing to change*") {
+                    $Status = "Nothing to change"
+                }
+
+                Return [PSCustomObject]@{
+                    Name   = $Name
+                    Uri    = $Uri
+                    Status = $Status
+                }
             }
 
-            Return [PSCustomObject]@{
-                Name   = $Name
-                Uri    = $Uri
-                Status = $Status
+            if ($WhatIfPreference) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + "--whatif")
+
+                if ($CommandOutput.RawOutput -like "Would have made a change to the configuration.") {
+                    $Status = "Would have made a change to the configuration."
+                }
+
+                Return [PSCustomObject]@{
+                    Name   = $Name
+                    Uri    = $Uri
+                    Status = $Status
+                }
             }
 
         }
