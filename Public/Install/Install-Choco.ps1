@@ -27,30 +27,33 @@ Function Install-Choco {
     .OUTPUTS
         PSCustomObject
     #>
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     [OutputType([PSCustomObject])]
     param(
         [String] $InstallerUrl = 'https://chocolatey.org/install.ps1'
     )
 
-    if (!(Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString($InstallerUrl))
-        $Cmd = Get-Command "choco.exe"
+    if ($PSCmdlet.ShouldProcess("Would install Chocolatey on $env:COMPUTERNAME if it's not already installed", "Chocolatey", "Install")) {
 
-        return [PSCustomObject]@{
-            Name   = $Cmd.Name
-            Path   = $Cmd.Source
-            Status = "Installed"
+        if (!(Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
+            Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString($InstallerUrl))
+            $Cmd = Get-Command "choco.exe"
+
+            return [PSCustomObject]@{
+                Name   = $Cmd.Name
+                Path   = $Cmd.Source
+                Status = "Installed"
+            }
         }
-    }
-    else {
-        $ChocoVersion = Get-ChocoVersion
-        $Cmd = Get-Command "choco.exe"
-        return [PSCustomObject]@{
-            Name    = $Cmd.Name
-            Path    = $Cmd.Source
-            Status  = "Already installed"
-            Version = $ChocoVersion
+        else {
+            $ChocoVersion = Get-ChocoVersion
+            $Cmd = Get-Command "choco.exe"
+            return [PSCustomObject]@{
+                Name    = $Cmd.Name
+                Path    = $Cmd.Source
+                Status  = "Already installed"
+                Version = $ChocoVersion
+            }
         }
     }
 }
