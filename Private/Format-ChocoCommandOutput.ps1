@@ -33,9 +33,11 @@ Function Format-ChocoCommandOutput {
             $Version = $null
         }
 
+        Write-Verbose (Out-String -InputObject $Output)
+
 
         # If the package was already installed
-        if ($Output -match "^ - $Name - $Name $Version already installed.$") {
+        if ($Output -match "^ - $Name - $Name v$Version already installed.$") {
             $Status = "Already installed"
         }
 

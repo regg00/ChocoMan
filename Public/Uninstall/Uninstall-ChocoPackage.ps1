@@ -24,11 +24,14 @@ Function Uninstall-ChocoPackage {
     .EXAMPLE
         Get-ChocoPackage -Name vlc | Uninstall-ChocoPackage
 
+    .EXAMPLE
+        Uninstall-ChocoPackage -Name vlc -WhatIf
+
     .OUTPUTS
         PSCustomObject
     #>
     [OutputType([PSCustomObject])]
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String[]] $Name,
@@ -56,9 +59,17 @@ Function Uninstall-ChocoPackage {
 
         foreach ($package in $Name) {
 
-            $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
+            if ($PSCmdlet.ShouldProcess($Name, "Uninstall-ChocoPackage")) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
 
-            Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+            }
+
+            if ($WhatIfPreference) {
+                $CommandOutput = Invoke-ChocoCommand ($Arguments + $package + "--whatif")
+                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+
+            }
         }
 
     }
