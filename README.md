@@ -72,6 +72,7 @@ Here's the status of each functions:
 | New-ChocoPackage                                           | :soon:             | Generates files necessary for a chocolatey package from a template                 |
 | Build-ChocoPackage                                         | :soon:             | Packages nuspec, scripts, and other Chocolatey package resources into a nupkg file |
 | Publish-ChocoPackage                                       | :soon:             | Pushes a compiled nupkg to a source                                                |
+| Set-ChocoConfig                                            | :soon:             | Edit chocolatey configuration                                                      |
 
 ## What else can I do?
 
