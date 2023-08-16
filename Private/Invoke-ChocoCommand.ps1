@@ -22,9 +22,27 @@ Function Invoke-ChocoCommand {
         $Arguments += "-r"
         $Arguments += "--no-color"
 
-        $ChocoCommand = @(Get-Command 'choco.exe' -CommandType 'Application' -ErrorAction 'SilentlyContinue')[0]
         Write-Verbose "Command to execute: choco $($Arguments -join ' ')"
-        $Output = (&$ChocoCommand $Arguments)
+
+        $Job = Start-Job { choco $args } -ArgumentList $Arguments
+
+        $Symbols = @("⣾⣿", "⣽⣿", "⣻⣿", "⢿⣿", "⡿⣿", "⣟⣿", "⣯⣿", "⣷⣿",
+            "⣿⣾", "⣿⣽", "⣿⣻", "⣿⢿", "⣿⡿", "⣿⣟", "⣿⣯", "⣿⣷")
+
+        $i = 0;
+        while ($Job.State -eq "Running") {
+            $symbol = $symbols[$i]
+            Write-Host -NoNewLine "`r$symbol $Label" -ForegroundColor Green
+            Start-Sleep -Milliseconds 100
+            $i++
+            if ($i -eq $symbols.Count) {
+                $i = 0;
+            }
+        }
+        Write-Host -NoNewLine "`r"
+
+
+        $Output = Receive-Job $Job
 
         if ($LASTEXITCODE -eq 1 -or $LASTEXITCODE -eq -1) {
             $Status = "Error"
