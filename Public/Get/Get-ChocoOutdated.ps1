@@ -4,6 +4,13 @@ Function Get-ChocoOutdated {
         Get the list of outdated chocolatey packages.
     .DESCRIPTION
         Get the list of outdated chocolatey packages.
+
+    .PARAMETER Source
+        The source to get the list of outdated packages from.
+
+    .PARAMETER PreRelease
+        Include pre-release versions in the search.
+
     .EXAMPLE
         Get-ChocoOutdated
         Name             CurrentVersion AvailableVersion Pinned
@@ -16,11 +23,25 @@ Function Get-ChocoOutdated {
     #>
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
-    param()
+    param(
+        [String] $Source,
+        [Switch] $PreRelease = $false
+    )
 
     if (Test-ChocoInstalled) {
+
+        [String[]]$Arguments = "outdated"
+
+        if ($Source) {
+            $Arguments += "-source", $Source
+        }
+
+        if ($PreRelease) {
+            $Arguments += "--pre"
+        }
+
         $Header = "Name", "CurrentVersion", "AvailableVersion", "Pinned"
-        $ChocoPackages = ConvertFrom-Csv (Invoke-ChocoCommand -Arguments "outdated").RawOutput -Delimiter '|' -Header $Header
+        $ChocoPackages = ConvertFrom-Csv (Invoke-ChocoCommand -Arguments $Arguments).RawOutput -Delimiter '|' -Header $Header
         Return $ChocoPackages | Where-Object { $_.Name -ne "[NuGet] No Authorization header detected" }
     }
 

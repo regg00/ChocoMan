@@ -10,6 +10,8 @@ Function Search-ChocoPackage {
         Search on a specific source. Defaults to the official Chocolatey repository.
     .PARAMETER Exact
         Search for an exact match.
+    .PARAMETER PreRelease
+        Include pre-release versions in the search.
 
     .EXAMPLE
         Search-ChocoPackage -Name "rufus"
@@ -53,18 +55,28 @@ Function Search-ChocoPackage {
     param(
         [Parameter(Position = 0)]
         [String] $Name,
-        [String] $Source = "chocolatey",
-        [Switch] $Exact
+        [String] $Source,
+        [Switch] $Exact,
+        [Switch] $PreRelease
     )
 
     if (Test-ChocoInstalled) {
         $Header = "Name", "Version"
-        [String[]]$Arguments = "search", $Name, "--source", $Source
-        Try {
+        [String[]]$Arguments = "search", $Name
 
-            if ($Exact) {
-                $Arguments += "--exact"
-            }
+        if ($Source) {
+            $Arguments += "-source", $Source
+        }
+
+        if ($Exact) {
+            $Arguments += "--exact"
+        }
+
+        if ($PreRelease) {
+            $Arguments += "--pre"
+        }
+        
+        Try {
 
             $CommandOutput = Invoke-ChocoCommand $Arguments
             if ($CommandOutput.Status -eq "Success") {

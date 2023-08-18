@@ -11,6 +11,10 @@ Function Update-ChocoPackage {
 
     .PARAMETER Force
         Will force the reinstallation of the package.
+    .PARAMETER PreRelease
+        If set, will include pre-release versions in the upgrade process.
+    .PARAMETER AskForConfirmation
+        If set, will ask for confirmation before updating the package.
 
     .EXAMPLE
         Update-ChocoPackage -Name rufus
@@ -38,7 +42,10 @@ Function Update-ChocoPackage {
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String] $Name,
-        [Switch] $Force = $false
+        [String] $Source,
+        [Switch] $Force = $false,
+        [Switch] $PreRelease = $false,
+        [Switch] $AskForConfirmation = $false
     )
 
 
@@ -46,6 +53,10 @@ Function Update-ChocoPackage {
 
         if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
             [String[]]$Arguments = "upgrade"
+
+            if ($Source) {
+                $Arguments += "-source", $Source
+            }
 
             if ($Force) {
                 $Arguments += "--force"
@@ -55,8 +66,11 @@ Function Update-ChocoPackage {
                 $Arguments += "-y"
             }
 
-        }
+            if ($PreRelease) {
+                $Arguments += "--pre"
+            }
 
+        }
 
     }
     process {
