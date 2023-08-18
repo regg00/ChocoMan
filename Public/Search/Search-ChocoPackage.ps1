@@ -53,24 +53,28 @@ Function Search-ChocoPackage {
     param(
         [Parameter(Position = 0)]
         [String] $Name,
-        [String] $Source = "chocolatey",
+        [String] $Source,
         [Switch] $Exact,
         [Switch] $PreRelease
     )
 
     if (Test-ChocoInstalled) {
         $Header = "Name", "Version"
-        [String[]]$Arguments = "search", $Name, "--source", $Source
+        [String[]]$Arguments = "search", $Name
+
+        if ($Source) {
+            $Arguments += "-source", $Source
+        }
+
+        if ($Exact) {
+            $Arguments += "--exact"
+        }
+
+        if ($PreRelease) {
+            $Arguments += "--pre"
+        }
+        
         Try {
-
-            if ($Exact) {
-                $Arguments += "--exact"
-            }
-
-            
-            if ($PreRelease) {
-                $Arguments += "--pre"
-            }
 
             $CommandOutput = Invoke-ChocoCommand $Arguments
             if ($CommandOutput.Status -eq "Success") {
