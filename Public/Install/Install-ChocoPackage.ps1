@@ -52,9 +52,10 @@ Function Install-ChocoPackage {
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String[]] $Name,
-        [String] $Source = "chocolatey",
+        [String] $Source,
         [Switch] $Upgrade = $false,
         [Switch] $Force = $false,
+        [Switch] $PreRelease = $false,
         [Switch] $AskForConfirmation
 
     )
@@ -69,8 +70,16 @@ Function Install-ChocoPackage {
                 [String[]]$Arguments = "install"
             }
 
+            if ($Source) {
+                $Arguments += "-source", $Source
+            }
+
             if ($Force) {
                 $Arguments += "--force"
+            }
+
+            if ($PreRelease) {
+                $Arguments += "--pre"
             }
 
             if (-Not ($AskForConfirmation)) {
@@ -80,8 +89,6 @@ Function Install-ChocoPackage {
     }
 
     process {
-
-        $Arguments += "--source", $Source
 
         foreach ($package in $Name) {
 
