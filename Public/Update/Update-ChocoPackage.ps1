@@ -40,7 +40,8 @@ Function Update-ChocoPackage {
         [String] $Name,
         [String] $Source,
         [Switch] $Force = $false,
-        [Switch] $PreRelease = $false
+        [Switch] $PreRelease = $false,
+        [Switch] $AskForConfirmation = $false
     )
 
 
