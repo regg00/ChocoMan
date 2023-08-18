@@ -38,7 +38,9 @@ Function Update-ChocoPackage {
     param(
         [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String] $Name,
-        [Switch] $Force = $false
+        [String] $Source,
+        [Switch] $Force = $false,
+        [Switch] $PreRelease = $false
     )
 
 
@@ -46,6 +48,10 @@ Function Update-ChocoPackage {
 
         if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
             [String[]]$Arguments = "upgrade"
+
+            if ($Source) {
+                $Arguments += "-source", $Source
+            }
 
             if ($Force) {
                 $Arguments += "--force"
@@ -55,8 +61,11 @@ Function Update-ChocoPackage {
                 $Arguments += "-y"
             }
 
-        }
+            if ($PreRelease) {
+                $Arguments += "--pre"
+            }
 
+        }
 
     }
     process {
