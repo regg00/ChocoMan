@@ -54,7 +54,8 @@ Function Search-ChocoPackage {
         [Parameter(Position = 0)]
         [String] $Name,
         [String] $Source = "chocolatey",
-        [Switch] $Exact
+        [Switch] $Exact,
+        [Switch] $PreRelease
     )
 
     if (Test-ChocoInstalled) {
@@ -64,6 +65,11 @@ Function Search-ChocoPackage {
 
             if ($Exact) {
                 $Arguments += "--exact"
+            }
+
+            
+            if ($PreRelease) {
+                $Arguments += "--pre"
             }
 
             $CommandOutput = Invoke-ChocoCommand $Arguments
