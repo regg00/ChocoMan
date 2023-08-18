@@ -14,7 +14,7 @@ If no name is specified this will return all available packages.
 ## SYNTAX
 
 ```
-Search-ChocoPackage [[-Name] <String>] [-Source <String>] [-Exact] [<CommonParameters>]
+Search-ChocoPackage [[-Name] <String>] [-Source <String>] [-Exact] [-PreRelease] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -97,6 +97,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -PreRelease
+Include pre-release versions in the search.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Source
 Search on a specific source.
 Defaults to the official Chocolatey repository.
@@ -108,7 +123,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: Chocolatey
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

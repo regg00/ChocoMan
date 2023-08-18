@@ -15,7 +15,8 @@ Just like Chocolatey, you may need admin rights to install a package.
 ## SYNTAX
 
 ```
-Update-ChocoPackage [-Name] <String> [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+Update-ChocoPackage [-Name] <String> [-Source <String>] [-Force] [-PreRelease] [-AskForConfirmation] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,6 +54,21 @@ rufus         Unhandled
 
 ## PARAMETERS
 
+### -AskForConfirmation
+If set, will ask for confirmation before updating the package.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Force
 Will force the reinstallation of the package.
 
@@ -80,6 +96,36 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -PreRelease
+If set, will include pre-release versions in the upgrade process.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Source
+{{ Fill Source Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
