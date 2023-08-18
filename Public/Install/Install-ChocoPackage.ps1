@@ -18,6 +18,9 @@ Function Install-ChocoPackage {
     .PARAMETER Force
         Will force the reinstallation of the package.
 
+    .PARAMETER PreRelease
+        If set, includes pre-release packages in the installation.
+        
     .PARAMETER AskForConfirmation
         Ask for confirmation before uninstalling the package.
 

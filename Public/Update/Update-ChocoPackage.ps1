@@ -11,6 +11,10 @@ Function Update-ChocoPackage {
 
     .PARAMETER Force
         Will force the reinstallation of the package.
+    .PARAMETER PreRelease
+        If set, will include pre-release versions in the upgrade process.
+    .PARAMETER AskForConfirmation
+        If set, will ask for confirmation before updating the package.
 
     .EXAMPLE
         Update-ChocoPackage -Name rufus

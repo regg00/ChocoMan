@@ -10,6 +10,8 @@ Function Search-ChocoPackage {
         Search on a specific source. Defaults to the official Chocolatey repository.
     .PARAMETER Exact
         Search for an exact match.
+    .PARAMETER PreRelease
+        Include pre-release versions in the search.
 
     .EXAMPLE
         Search-ChocoPackage -Name "rufus"
