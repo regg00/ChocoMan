@@ -27,20 +27,41 @@ Function Get-ChocoPackage {
     [OutputType([PSCustomObject])]
     param(
         [String] $Name,
-        [Switch] $Outdated
+        [Switch] $Outdated,
+        [Switch] $Details
     )
 
     if (Test-ChocoInstalled) {
-        $ChocoCommandOutput = Invoke-ChocoCommand -Arguments "list" -ErrorAction SilentlyContinue
-        if ($Outdated) {
-            Return Get-ChocoOutdated
-        }
-        $Header = "Name", "Version"
-        if ($Name) {
-            Return ConvertFrom-Csv $ChocoCommandOutput.RawOutput -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
+
+        if ($Details) {
+            Write-Verbose "Gettings details of a package"
+            $ChocoCommandOutput = Invoke-ChocoCommand -Arguments "info", $Name, "--no-color" -ErrorAction SilentlyContinue -BypassDefaultArgs
+
+            Return [PSCustomObject]@{
+                Title             = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Title:.*$").Replace("Title: ", "").Split("|")[0].Trim()
+                NumberOfDownloads = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Number of Downloads: ([0-9]+)").Replace("Number of Downloads: ", "").Split("|")[0].Trim()
+                Checksum          = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Package Checksum:.*$").Replace("Package Checksum: ", "").Replace("(SHA512)", "").Replace("'", "").Trim()
+                Tags              = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Tags: .*$").Replace("Tags: ", "").Trim()
+                Summary           = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Summary: .*$").Replace("Summary: ", "").Trim()
+                Description       = ($ChocoCommandOutput.RawOutput | Select-String -AllMatches -Raw -Pattern "^ Description:((.|\n)*)").Replace("Description:", "").Trim()
+            }
+
+
         }
         else {
-            Return ConvertFrom-Csv $ChocoCommandOutput.RawOutput -Delimiter '|' -Header $Header
+            $ChocoCommandOutput = Invoke-ChocoCommand -Arguments "list" -ErrorAction SilentlyContinue
+            if ($Outdated) {
+                Return Get-ChocoOutdated
+            }
+            $Header = "Name", "Version"
+            if ($Name) {
+                Return ConvertFrom-Csv $ChocoCommandOutput.RawOutput -Delimiter '|' -Header $Header | Where-Object { $_.Name -eq $Name }
+            }
+            else {
+                Return ConvertFrom-Csv $ChocoCommandOutput.RawOutput -Delimiter '|' -Header $Header
+            }
         }
+
+
     }
 }
