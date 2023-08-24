@@ -40,6 +40,7 @@
         'Get-ChocoVersion',
         'Get-ChocoPackages',
         'Get-ChocoPackage',
+        'Get-ChocoPackageInfo',
         'Get-ChocoOutdated',
         'Get-ChocoSource',
         'Search-ChocoPackage',
