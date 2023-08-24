@@ -14,13 +14,16 @@ Function Invoke-ChocoCommand {
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
-        [String[]] $Arguments
+        [String[]] $Arguments,
+        [Switch] $BypassDefaultArgs
     )
 
     if (Test-ChocoInstalled) {
 
-        $Arguments += "-r"
-        $Arguments += "--no-color"
+        if (-Not $BypassDefaultArgs) {
+            $Arguments += "-r"
+            $Arguments += "--no-color"
+        }
 
         Write-Verbose "Command to execute: choco $($Arguments -join ' ')"
 
