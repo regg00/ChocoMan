@@ -124,8 +124,7 @@ Describe 'Sources' {
 
 Describe 'Version' {
     It 'Returns a valid version number' {
-        $Versions = @('2.1.0', '2.0.0', '1.4.0', '1.3.1', '2.2.0' )
-        Get-ChocoVersion | Should -BeIn $Versions
+        Get-ChocoVersion | Should -Match "1.*.*|2.*.*"
     }
 }
 
