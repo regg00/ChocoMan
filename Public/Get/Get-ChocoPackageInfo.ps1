@@ -33,86 +33,100 @@ Function Get-ChocoPackageInfo {
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
+        [Parameter(Mandatory = $true, Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String] $Name
     )
 
-    if (Test-ChocoInstalled) {
-        $ChocoCommandOutput = Invoke-ChocoCommand -Arguments "info", $Name, "--no-color" -ErrorAction SilentlyContinue -BypassDefaultArgs
+    begin {
+        if (Test-ChocoInstalled) {
+            [String[]]$Arguments = "info", "--no-color"
 
-        Try {
-            $Title = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Title:.*$").Replace("Title: ", "").Split("|")[0].Trim()
         }
-        Catch {
-            $Title = "Cannot parse content"
-        }
-
-        Try {
-            $Checksum = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Package Checksum:.*$").Replace("Package Checksum: ", "").Replace("(SHA512)", "").Replace("'", "").Trim()
-        }
-        Catch {
-            $Checksum = "Cannot parse content"
-        }
-
-        Try {
-            $Tags = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Tags: .*$").Replace("Tags: ", "").Trim()
-        }
-        Catch {
-            $Tags = "Cannot parse content"
-        }
-
-        Try {
-            $Summary = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Summary: .*$").Replace("Summary: ", "").Trim()
-        }
-        Catch {
-            $Summary = "Cannot parse content"
-        }
-
-        Try {
-            $SoftwareSite = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software Site: .*$").Replace("Software Site: ", "").Trim()
-        }
-        Catch {
-            $SoftwareSite = "Cannot parse content"
-        }
-
-        Try {
-            $SoftwareLicense = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software License: .*$").Replace("Software License: ", "").Trim()
-        }
-        Catch {
-            $SoftwareLicense = "Cannot parse content"
-        }
-
-        Try {
-            $SoftwareSource = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software Source: .*$").Replace("Software Source: ", "").Trim()
-        }
-        Catch {
-            $SoftwareSource = "Cannot parse content"
-        }
-
-        Try {
-            $Description = (([regex]::matches($ChocoCommandOutput.RawOutput, " Description:((.|\n)*)")).value).Replace("Description: ", "").Replace("1 packages found.", "").Trim()
-        }
-        Catch {
-            $Description = "Cannot parse content"
-        }
-
-        Try {
-            $TotalDownloads = [int](($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Number of Downloads: ([0-9]+)").Replace("Number of Downloads: ", "").Split("|")[0].Trim())
-        }
-        Catch {
-            $TotalDownloads = "Cannot parse content"
-        }
-
-        Return [PSCustomObject]@{
-            Title           = $Title
-            TotalDownloads  = $TotalDownloads
-            Checksum        = $Checksum
-            Tags            = $Tags
-            Summary         = $Summary
-            SoftwareSite    = $SoftwareSite
-            SoftwareLicense = $SoftwareLicense
-            SoftwareSource  = $SoftwareSource
-            Description     = $Description
-        }
-
     }
+    process {
+        ForEach ($Package in $Name) {
+            $ChocoCommandOutput = Invoke-ChocoCommand -Arguments "info", $Name, "--no-color" -ErrorAction SilentlyContinue -BypassDefaultArgs
+
+            Try {
+                $Title = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Title:.*$").Replace("Title: ", "").Split("|")[0].Trim()
+            }
+            Catch {
+                $Title = "Cannot parse content"
+            }
+
+            Try {
+                $Checksum = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Package Checksum:.*$").Replace("Package Checksum: ", "").Replace("(SHA512)", "").Replace("'", "").Trim()
+            }
+            Catch {
+                $Checksum = "Cannot parse content"
+            }
+
+            Try {
+                $Tags = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Tags: .*$").Replace("Tags: ", "").Trim()
+            }
+            Catch {
+                $Tags = "Cannot parse content"
+            }
+
+            Try {
+                $Summary = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Summary: .*$").Replace("Summary: ", "").Trim()
+            }
+            Catch {
+                $Summary = "Cannot parse content"
+            }
+
+            Try {
+                $SoftwareSite = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software Site: .*$").Replace("Software Site: ", "").Trim()
+            }
+            Catch {
+                $SoftwareSite = "Cannot parse content"
+            }
+
+            Try {
+                $SoftwareLicense = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software License: .*$").Replace("Software License: ", "").Trim()
+            }
+            Catch {
+                $SoftwareLicense = "Cannot parse content"
+            }
+
+            Try {
+                $SoftwareSource = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software Source: .*$").Replace("Software Source: ", "").Trim()
+            }
+            Catch {
+                $SoftwareSource = "Cannot parse content"
+            }
+
+            Try {
+                $Description = (([regex]::matches($ChocoCommandOutput.RawOutput, " Description:((.|\n)*)")).value).Replace("Description: ", "").Replace("1 packages found.", "").Trim()
+            }
+            Catch {
+                $Description = "Cannot parse content"
+            }
+
+            Try {
+                $TotalDownloads = [int](($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Number of Downloads: ([0-9]+)").Replace("Number of Downloads: ", "").Split("|")[0].Trim())
+            }
+            Catch {
+                $TotalDownloads = "Cannot parse content"
+            }
+
+            Return [PSCustomObject]@{
+                Title           = $Title
+                TotalDownloads  = $TotalDownloads
+                Checksum        = $Checksum
+                Tags            = $Tags
+                Summary         = $Summary
+                SoftwareSite    = $SoftwareSite
+                SoftwareLicense = $SoftwareLicense
+                SoftwareSource  = $SoftwareSource
+                Description     = $Description
+            }
+
+        }
+    }
+    end {}
+
+
+
+
 }
