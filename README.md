@@ -61,6 +61,8 @@ Here's the status of each functions:
 | [Get-ChocoPackage](./Docs/Get-ChocoPackage.md)             | :white_check_mark: | Get a specific locally installed chocolatey package.                               |
 | [Get-ChocoSources](./Docs/Get-ChocoSources.md)             | :white_check_mark: | Get the list of chocolatey sources.                                                |
 | [Get-ChocoVersion](./Docs/Get-ChocoVersion.md)             | :white_check_mark: | Get the version of chocolatey.                                                     |
+| [Get-ChocoManVersion](./Docs/Get-ChocoManVersion.md)       | :white_check_mark: | Get the version of ChocoMan.                                                       |
+| [Get-ChocoPackageInfo](./Docs/Get-ChocoPackageInfo.md)     | :white_check_mark: | Get information on an existing package.                                            |
 | [Set-ChocoApiKey](./Docs/Set-ChocoApikey.md)               | :white_check_mark: | Edit API keys                                                                      |
 | [Search-ChocoPackage](./Docs/Search-ChocoPackage.md)       | :white_check_mark: | Search for a chocolatey package.                                                   |
 | [Add-ChocoApiKey](./Docs/Set-ChocoApiKey.md)               | :white_check_mark: | Adds a new API. Aliases to Set-ChocoApiKey. keuy                                   |
