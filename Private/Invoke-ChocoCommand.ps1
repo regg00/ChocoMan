@@ -42,7 +42,8 @@ Function Invoke-ChocoCommand {
                 $i++
                 if ($i -eq $symbols.Count) {
                     $i = 0;
-                }   
+                }
+            }
         }
         Write-Host -NoNewLine "`r"
 
