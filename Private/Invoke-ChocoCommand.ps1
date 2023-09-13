@@ -34,12 +34,15 @@ Function Invoke-ChocoCommand {
 
         $i = 0;
         while ($Job.State -eq "Running") {
-            $symbol = $symbols[$i]
-            Write-Host -NoNewLine "`r$symbol $Label" -ForegroundColor Green
-            Start-Sleep -Milliseconds 100
-            $i++
-            if ($i -eq $symbols.Count) {
-                $i = 0;
+            # Suppress activity indicator if PowerShell ProgressPreference is set to SilentlyContinue
+            If($ProgressPreference -ne "SilentlyContinue") {
+                $symbol = $symbols[$i]
+                Write-Host -NoNewLine "`r$symbol $Label" -ForegroundColor Green
+                Start-Sleep -Milliseconds 100
+                $i++
+                if ($i -eq $symbols.Count) {
+                    $i = 0;
+                }
             }
         }
         Write-Host -NoNewLine "`r"

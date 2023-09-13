@@ -44,6 +44,14 @@ Chocolatey v2.1.0 installed
 
 First things first, you need to import it `Import-Module ChocoMan`
 
+## Hide the activity indicator
+
+The activity indicator can be hidden by setting the `ProgressPreference` variable to `SilentlyContinue`
+
+```powershell
+PS C:\> Set-Variable ProgressPreference SilentlyContinue ; Get-ChocoOutdated
+```
+
 ### Demo
 
 <img src="./Docs/demo.gif" height="500">
