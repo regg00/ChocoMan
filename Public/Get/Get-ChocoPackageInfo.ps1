@@ -46,49 +46,49 @@ Function Get-ChocoPackageInfo {
         $ChocoCommandOutput = Invoke-ChocoCommand -Arguments "info", $Name, "--no-color" -ErrorAction SilentlyContinue -BypassDefaultArgs
 
         Try {
-            $Title = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Title:.*$").Replace("Title: ", "").Split("|")[0].Trim()
+            $Title = ($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Title:.*$").ToString().Replace("Title: ", "").Split("|")[0].Trim()
         }
         Catch {
             $Title = "Cannot parse content"
         }
 
         Try {
-            $Checksum = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Package Checksum:.*$").Replace("Package Checksum: ", "").Replace("(SHA512)", "").Replace("'", "").Trim()
+            $Checksum = ($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Package Checksum:.*$").ToString().Replace("Package Checksum: ", "").Replace("(SHA512)", "").Replace("'", "").Trim()
         }
         Catch {
             $Checksum = "Cannot parse content"
         }
 
         Try {
-            $Tags = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Tags: .*$").Replace("Tags: ", "").Trim()
+            $Tags = ($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Tags: .*$").ToString().Replace("Tags: ", "").Trim()
         }
         Catch {
             $Tags = "Cannot parse content"
         }
 
         Try {
-            $Summary = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Summary: .*$").Replace("Summary: ", "").Trim()
+            $Summary = ($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Summary: .*$").ToString().Replace("Summary: ", "").Trim()
         }
         Catch {
             $Summary = "Cannot parse content"
         }
 
         Try {
-            $SoftwareSite = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software Site: .*$").Replace("Software Site: ", "").Trim()
+            $SoftwareSite = ($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Software Site: .*$").ToString().Replace("Software Site: ", "").Trim()
         }
         Catch {
             $SoftwareSite = "Cannot parse content"
         }
 
         Try {
-            $SoftwareLicense = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software License: .*$").Replace("Software License: ", "").Trim()
+            $SoftwareLicense = ($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Software License: .*$").ToString().Replace("Software License: ", "").Trim()
         }
         Catch {
             $SoftwareLicense = "Cannot parse content"
         }
 
         Try {
-            $SoftwareSource = ($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Software Source: .*$").Replace("Software Source: ", "").Trim()
+            $SoftwareSource = ($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Software Source: .*$").ToString().Replace("Software Source: ", "").Trim()
         }
         Catch {
             $SoftwareSource = "Cannot parse content"
@@ -102,7 +102,7 @@ Function Get-ChocoPackageInfo {
         }
 
         Try {
-            $TotalDownloads = [int](($ChocoCommandOutput.RawOutput | Select-String -Raw -Pattern "^ Number of Downloads: ([0-9]+)").Replace("Number of Downloads: ", "").Split("|")[0].Trim())
+            $TotalDownloads = [int](($ChocoCommandOutput.RawOutput | Select-String -Pattern "^ Number of Downloads: ([0-9]+)").ToString().Replace("Number of Downloads: ", "").Split("|")[0].Trim())
         }
         Catch {
             $TotalDownloads = "Cannot parse content"
