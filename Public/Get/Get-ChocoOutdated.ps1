@@ -41,8 +41,19 @@ Function Get-ChocoOutdated {
         }
 
         $Header = "Name", "CurrentVersion", "AvailableVersion", "Pinned"
-        $ChocoPackages = ConvertFrom-Csv (Invoke-ChocoCommand -Arguments $Arguments).RawOutput -Delimiter '|' -Header $Header
+        try {
+            $ChocoPackages = ConvertFrom-Csv (Invoke-ChocoCommand -Arguments $Arguments).RawOutput -Delimiter '|' -Header $Header
+        }
+        catch {
+            $ChocoPackages = [PSCustomObject]@{
+                Name = "All packages are up to date"
+            }
+        }
         Return $ChocoPackages | Where-Object { $_.Name -ne "[NuGet] No Authorization header detected" }
+
+
+
+
     }
 
 }
