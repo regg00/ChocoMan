@@ -72,6 +72,7 @@ Here's the status of each functions:
 | [Get-ChocoManVersion](./Docs/Get-ChocoManVersion.md)       | :white_check_mark: | Get the version of ChocoMan.                                                       |
 | [Get-ChocoPackageInfo](./Docs/Get-ChocoPackageInfo.md)     | :white_check_mark: | Get information on an existing package.                                            |
 | [Set-ChocoApiKey](./Docs/Set-ChocoApikey.md)               | :white_check_mark: | Edit API keys                                                                      |
+| [Set-ChocoConfig](./Docs/Set-ChocoConfig.md)                                            | :white_check_mark: | Edit chocolatey configuration                                                      |
 | [Search-ChocoPackage](./Docs/Search-ChocoPackage.md)       | :white_check_mark: | Search for a chocolatey package.                                                   |
 | [Add-ChocoApiKey](./Docs/Set-ChocoApiKey.md)               | :white_check_mark: | Adds a new API. Aliases to Set-ChocoApiKey. keuy                                   |
 | [Add-ChocoSource ](./Docs/Add-ChocoSource.md)              | :white_check_mark: | Adds a new chocolatey source                                                       |
@@ -83,7 +84,7 @@ Here's the status of each functions:
 | New-ChocoPackage                                           | :soon:             | Generates files necessary for a chocolatey package from a template                 |
 | Build-ChocoPackage                                         | :soon:             | Packages nuspec, scripts, and other Chocolatey package resources into a nupkg file |
 | Publish-ChocoPackage                                       | :soon:             | Pushes a compiled nupkg to a source                                                |
-| Set-ChocoConfig                                            | :soon:             | Edit chocolatey configuration                                                      |
+
 
 ## What else can I do?
 
