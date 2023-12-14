@@ -48,6 +48,7 @@
         'Get-ChocoApiKey',
         'Set-ChocoApiKey',
         'Add-ChocoSource',
+        'Remove-ChocoSource',
         'Get-ChocoConfig',
         'Get-ChocoFeature',
         'Uninstall-ChocoPackage',
