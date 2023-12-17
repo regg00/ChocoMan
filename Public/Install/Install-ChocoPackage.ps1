@@ -20,7 +20,7 @@ Function Install-ChocoPackage {
 
     .PARAMETER PreRelease
         If set, includes pre-release packages in the installation.
-        
+
     .PARAMETER AskForConfirmation
         Ask for confirmation before uninstalling the package.
 
@@ -94,20 +94,16 @@ Function Install-ChocoPackage {
     process {
 
         foreach ($package in $Name) {
-
-
             if ($PSCmdlet.ShouldProcess($Name, "Install-ChocoPackage")) {
                 $CommandOutput = Invoke-ChocoCommand ($Arguments + $package)
-                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+                Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
             }
 
             if ($WhatIfPreference) {
                 $CommandOutput = Invoke-ChocoCommand ($Arguments + $package + "--whatif")
-                Return Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
+                Format-ChocoCommandOutput -OutputObject $CommandOutput -Name $package
 
             }
-
-
 
         }
     }
