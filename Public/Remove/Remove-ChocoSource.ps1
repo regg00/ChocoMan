@@ -4,11 +4,15 @@ Function Remove-ChocoSource {
         Removes a chocolatey source.
     .DESCRIPTION
         Removes a chocolatey source.
-    .PARAMETER Name
-        The name of the source.
-
+    .PARAMETER Source
+        The name or uri of the source to remove.
     .EXAMPLE
-        Remove-ChocoSource -Name test
+        Remove-ChocoSource -Source test
+        Name Status
+        ---- ------
+        test Removed
+   .EXAMPLE
+        Remove-ChocoSource -Source https://chocolatey.org/api/v2
         Name Status
         ---- ------
         test Removed
@@ -19,48 +23,74 @@ Function Remove-ChocoSource {
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType([PSCustomObject])]
     param(
-        [Parameter(Mandatory = $true)]
-        [String] $Name
-
+        [Parameter(Mandatory = $true, Position = 0)]
+        [String] $Source
     )
     begin {
+
         if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
 
-            [String[]]$Arguments = "source", "remove", "-n=$Name"
+            if($Source -like "http*") {
+                $Server = $Source
+            } else {
+                $Name = $Source
+            }
 
+            [String[]]$Arguments = "source", "remove"
+
+            if($Name) {
+                $target = $Name
+                $targetType = "Name"
+            } else {
+                $target = $Server
+                $targetType = "Server"
+            }
         }
     }
     process {
         try {
 
-            if ($PSCmdlet.ShouldProcess($Name, "Remove-ChocoSource")) {
+            if ($PSCmdlet.ShouldProcess($target, "Remove-ChocoSource")) {
 
-                if ((Get-ChocoSource -Name test).Name) {
+                # Determine the target for removal based on provided parameters
+                if ($Name) {
+                    $Server = (Get-ChocoSource | Where-Object Name -eq $Name).Name
+                } elseif ($Server) {
+                    $Name = (Get-ChocoSource | Where-Object Uri -eq $Server).Name
+                }
+
+                if ($Name -and $Server) {
+                    $Arguments += "-n=$Name"
+                    $Arguments += "-s=$Server"
+
                     $CommandOutput = Invoke-ChocoCommand $Arguments
 
                     if ($CommandOutput.RawOutput -like "Removed $Name") {
                         Return [PSCustomObject]@{
-                            Name   = $Name
+                            Target = $Target
+                            TargetType = $targetType
                             Status = "Removed"
                         }
-                    }
+                    } 
                     else {
                         Return [PSCustomObject]@{
-                            Name   = $Name
+                            Target   = $Target
+                            TargetType = $targetType
                             Status = "Something went wrong"
                         }
                     }
-                }
-
+                } 
+                
                 else {
                     Return [PSCustomObject]@{
-                        Name   = $Name
+                        Target = $target
+                        TargetType = $targetType
                         Status = "Source does not exist"
+                        }
                     }
+
+
                 }
-
-
-            }
 
             if ($WhatIfPreference) {
                 $CommandOutput = Invoke-ChocoCommand ($Arguments + "--whatif")
