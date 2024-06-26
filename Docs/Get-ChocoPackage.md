@@ -14,7 +14,7 @@ Returns all packages if no name is specified.
 ## SYNTAX
 
 ```
-Get-ChocoPackage [[-Name] <String>] [-Outdated] [<CommonParameters>]
+Get-ChocoPackage [[-Name] <String>] [-Outdated] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,6 +68,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

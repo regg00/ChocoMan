@@ -13,7 +13,8 @@ Removes a chocolatey source.
 ## SYNTAX
 
 ```
-Remove-ChocoSource [-Name] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-ChocoSource [-Source] <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +24,15 @@ Removes a chocolatey source.
 
 ### EXAMPLE 1
 ```
-Remove-ChocoSource -Name test
+Remove-ChocoSource -Source test
+Name Status
+---- ------
+test Removed
+```
+
+### EXAMPLE 2
+```
+Remove-ChocoSource -Source https://chocolatey.org/api/v2
 Name Status
 ---- ------
 test Removed
@@ -31,8 +40,23 @@ test Removed
 
 ## PARAMETERS
 
-### -Name
-The name of the source.
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Source
+The name or uri of the source to remove.
 
 ```yaml
 Type: String
