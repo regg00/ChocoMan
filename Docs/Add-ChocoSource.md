@@ -13,7 +13,7 @@ Add a new chocolatey source.
 ## SYNTAX
 
 ```
-Add-ChocoSource [-Name] <String> [-Uri] <String> [[-Priority] <String>] [[-Credential] <PSCredential>]
+Add-ChocoSource [-Name] <String> [-Uri] <String> [[-Priority] <Int16>] [[-Credential] <PSCredential>]
  [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -63,7 +63,7 @@ Accept wildcard characters: False
 The priority of the source.
 
 ```yaml
-Type: String
+Type: Int16
 Parameter Sets: (All)
 Aliases:
 
