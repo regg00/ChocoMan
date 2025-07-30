@@ -10,11 +10,10 @@ Function Add-ChocoSource {
         The Uri of the source.
     .PARAMETER Credential
         The credential to use to access the source.
+    .PARAMETER Priority
+        The priority of the source.
     .EXAMPLE
-        Add-ChocoSource
-        Name                Uri                                                 UserName
-        ----                ---                                                 --------
-        chocolatey          https://community.chocolatey.org/api/v2/
+        Add-ChocoSource -Name test -Url https://test.com -Priority 10        
 
     .OUTPUTS
         PSCustomObject
@@ -27,13 +26,16 @@ Function Add-ChocoSource {
 
         [Parameter(Mandatory = $true)]
         [String] $Uri,
+        
+        [Parameter(Mandatory = $false)]
+        [String] $Priority = 0,
 
         [PSCredential] $Credential
     )
     begin {
         if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
 
-            [String[]]$Arguments = "source", "add", "-s=""$Uri""", "-n=$Name"
+            [String[]]$Arguments = "source", "add", "-s=""$Uri""", "-n=$Name", "--priority=$Priority"
 
             if ($Credential) {
                 $Arguments += "-u=$($Credential.GetNetworkCredential().UserName)"
