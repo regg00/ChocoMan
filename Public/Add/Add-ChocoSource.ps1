@@ -28,7 +28,7 @@ Function Add-ChocoSource {
         [String] $Uri,
         
         [Parameter(Mandatory = $false)]
-        [String] $Priority = 0,
+        [Int16] $Priority = 0,
 
         [PSCredential] $Credential
     )
