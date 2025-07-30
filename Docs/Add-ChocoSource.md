@@ -13,7 +13,7 @@ Add a new chocolatey source.
 ## SYNTAX
 
 ```
-Add-ChocoSource [-Name] <String> [-Uri] <String> [[-Credential] <PSCredential>]
+Add-ChocoSource [-Name] <String> [-Uri] <String> [[-Priority] <String>] [[-Credential] <PSCredential>]
  [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -24,10 +24,7 @@ Add a new chocolatey source.
 
 ### EXAMPLE 1
 ```
-Add-ChocoSource
-Name                Uri                                                 UserName
-----                ---                                                 --------
-chocolatey          https://community.chocolatey.org/api/v2/
+Add-ChocoSource -Name test -Url https://test.com -Priority 10
 ```
 
 ## PARAMETERS
@@ -41,7 +38,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -58,6 +55,21 @@ Aliases:
 Required: True
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Priority
+The priority of the source.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
