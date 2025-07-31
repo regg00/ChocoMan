@@ -28,21 +28,15 @@ Function Invoke-ChocoCommand {
         Write-Verbose "Command to execute: choco $($Arguments -join ' ')"
 
         $Job = Start-Job { choco $args } -ArgumentList $Arguments
+        $ProgressActivity = "Running choco $Arguments"
 
-        $Symbols = @("⣾⣿", "⣽⣿", "⣻⣿", "⢿⣿", "⡿⣿", "⣟⣿", "⣯⣿", "⣷⣿",
-            "⣿⣾", "⣿⣽", "⣿⣻", "⣿⢿", "⣿⡿", "⣿⣟", "⣿⣯", "⣿⣷")
+        Write-Progress -Id $Job.Id -Activity $ProgressActivity -Status "Starting job..." -PercentComplete -1
 
-        $i = 0;
         while ($Job.State -eq "Running") {
             # Suppress activity indicator if PowerShell ProgressPreference is set to SilentlyContinue
             If($ProgressPreference -ne "SilentlyContinue") {
-                $symbol = $symbols[$i]
-                Write-Host -NoNewLine "`r$symbol $Label" -ForegroundColor Green
-                Start-Sleep -Milliseconds 100
-                $i++
-                if ($i -eq $symbols.Count) {
-                    $i = 0;
-                }
+                Write-Progress -Id $Job.Id -Activity $ProgressActivity -Status "Running..." -PercentComplete -1
+                Wait-Job -Id $Job.Id -Timeout 1
             }
         }
         Write-Host -NoNewLine "`r"
