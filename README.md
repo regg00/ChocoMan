@@ -80,8 +80,8 @@ Here's the status of each functions:
 | [Install-ChocoPackage](./Docs/Install-ChocoPackage.md)     | :white_check_mark: | Installs a chocolatey package.                                                     |
 | [Uninstall-ChocoPackage](./Docs/Uninstall-ChocoPackage.md) | :white_check_mark: | Uninstalls a chocolatey package.                                                   |
 | [Update-ChocoPackage](./Docs/Update-ChocoPackage.md)       | :white_check_mark: | Updates a chocolatey package.                                                      |
-| [Remove-ChocoSource ](./Docs/Remove-ChocoSource.md)        | :white_check_mark: | Removes a chocolatey source                                                       |
-| New-ChocoPackage                                           | :soon:             | Generates files necessary for a chocolatey package from a template                 |
+| [Remove-ChocoSource ](./Docs/Remove-ChocoSource.md)        | :white_check_mark: | Removes a chocolatey source                                                        |
+| [New-ChocoPackage ](./Docs/New-ChocoPackage.md)            | :white_check_mark: | Generates files necessary for a chocolatey package from a template                 |
 | Build-ChocoPackage                                         | :soon:             | Packages nuspec, scripts, and other Chocolatey package resources into a nupkg file |
 | Publish-ChocoPackage                                       | :soon:             | Pushes a compiled nupkg to a source                                                |
 

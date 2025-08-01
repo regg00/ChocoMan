@@ -12,7 +12,7 @@
     RootModule        = '.\ChocoMan.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.3.2'
+    ModuleVersion     = '1.3.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -55,7 +55,8 @@
         'Update-ChocoPackage',
         'Get-ChocoManVersion',
         'Get-ChocoPackageInfo',
-        'Set-ChocoConfig'
+        'Set-ChocoConfig',
+        'New-ChocoPackage'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

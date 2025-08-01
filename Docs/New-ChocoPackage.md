@@ -5,44 +5,37 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-ChocoSource
+# New-ChocoPackage
 
 ## SYNOPSIS
-Removes a chocolatey source.
+Create a new empty package.
 
 ## SYNTAX
 
 ```
-Remove-ChocoSource [-Source] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+New-ChocoPackage [-Name] <String> [[-OutputDir] <String>] [[-Version] <String>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Removes a chocolatey source.
+Create a new empty package.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Remove-ChocoSource -Source test
+New-ChocoPackage -Name test
 ```
-
-Name Status
----- ------
-test Removed
 
 ### EXAMPLE 2
 ```
-Remove-ChocoSource -Source https://chocolatey.org/api/v2
+New-ChocoPackage -Name test -OutputDir C:\test -Version 2.0.0
 ```
-
-Name Status
----- ------
-test Removed
 
 ## PARAMETERS
 
-### -Source
-The name or uri of the source to remove.
+### -Name
+The name of the package to create.
 
 ```yaml
 Type: String
@@ -52,6 +45,38 @@ Aliases:
 Required: True
 Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -OutputDir
+The local path where the package files will be created.
+Defaults to current directory.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: "$PWD"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Version
+The version of the package to create.
+Defaults to 1.0.0.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: 1.0.0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

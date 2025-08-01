@@ -39,6 +39,7 @@ Function Invoke-ChocoCommand {
                 Wait-Job -Id $Job.Id -Timeout 1
             }
         }
+        Write-Progress -Completed -Activity $ProgressActivity
         Write-Host -NoNewLine "`r"
 
 

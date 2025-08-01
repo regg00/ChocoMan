@@ -13,7 +13,7 @@ Retrieves the configured Chocolatey sources
 ## SYNTAX
 
 ```
-Get-ChocoSource [[-Name] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-ChocoSource [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,19 +24,21 @@ Retrieves the configured Chocolatey sources
 ### EXAMPLE 1
 ```
 Get-ChocoSource
+```
+
 Name                Uri                                              Disabled BypassProxy SelfService AdminOnly Priority User
 ----                ---                                              -------- ----------- ----------- --------- -------- ----
 chocolatey          https://community.chocolatey.org/api/v2/         false    false       false       false     0
 chocolatey.licensed https://licensedpackages.chocolatey.org/api/v2/  false    false       false       false     10       customer
-```
 
 ### EXAMPLE 2
 ```
 Get-ChocoSource -Name chocolatey
+```
+
 Name       Uri                                      Disabled BypassProxy SelfService AdminOnly Priority User
 ----       ---                                      -------- ----------- ----------- --------- -------- ----
 chocolatey https://community.chocolatey.org/api/v2/ false    false       false       false     0
-```
 
 ## PARAMETERS
 
@@ -50,21 +52,6 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
