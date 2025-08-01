@@ -32,16 +32,16 @@ Function New-ChocoPackage {
         
     )
     begin {
-        if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
+        if (Test-ChocoInstalled) {
 
-            [String[]]$Arguments = "new", "-n=$Name", "--version=$Version", "--out=$OutputDir"
+            [String[]]$Arguments = "new", "-n=$Name", "--version=$Version", "--out=""$OutputDir"""
             
         }
     }
     process {
         try {
 
-            if ($PSCmdlet.ShouldProcess($Name, "Add-ChocoSource")) {
+            if ($PSCmdlet.ShouldProcess($Name, "New-ChocoPackage")) {
 
                 $CommandOutput = Invoke-ChocoCommand $Arguments
 
@@ -75,7 +75,7 @@ Function New-ChocoPackage {
 
         }
         catch {
-            Write-Error "Cannot add source. Error: $_"
+            Write-Error "Cannot create package. Error: $_"
         }
 
     }
