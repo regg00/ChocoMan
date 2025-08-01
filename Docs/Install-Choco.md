@@ -13,7 +13,8 @@ Install chocolatey.
 ## SYNTAX
 
 ```
-Install-Choco [[-InstallerUrl] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Install-Choco [[-InstallerUrl] <String>] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,19 +25,16 @@ Install chocolatey.
 ### EXAMPLE 1
 ```
 Install-Choco
-```
-
 Chocolatey is already installed.
+```
 
 ### EXAMPLE 2
 ```
 Install-Choco -InstallerUrl 'https://chocolatey.org/install.ps1'
-```
-
 WARNING: 'choco' was found at 'C:\ProgramData\chocolatey\bin\choco.exe'.
-WARNING: An existing Chocolatey installation was detected.
-Installation will not continue.
+WARNING: An existing Chocolatey installation was detected. Installation will not continue.
 For security reasons, this script will not overwrite existing installations.
+```
 
 Please use choco upgrade chocolatey to handle upgrades of Chocolatey itself.
 If the existing installation is not functional or a prior installation did not complete, follow these steps:
@@ -61,6 +59,21 @@ Aliases:
 Required: False
 Position: 1
 Default value: Https://chocolatey.org/install.ps1
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

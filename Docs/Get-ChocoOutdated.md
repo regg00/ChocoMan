@@ -13,7 +13,7 @@ Get the list of outdated chocolatey packages.
 ## SYNTAX
 
 ```
-Get-ChocoOutdated [[-Source] <String>] [-PreRelease] [<CommonParameters>]
+Get-ChocoOutdated [[-Source] <String>] [-PreRelease] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,12 +24,11 @@ Get the list of outdated chocolatey packages.
 ### EXAMPLE 1
 ```
 Get-ChocoOutdated
-```
-
 Name             CurrentVersion AvailableVersion Pinned
 ----             -------------- ---------------- ------
 adobereader      2023.3.20201.1 2023.003.20215   false
 github-desktop   3.2.3          3.2.6            false
+```
 
 ## PARAMETERS
 
@@ -44,6 +43,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

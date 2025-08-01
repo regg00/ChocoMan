@@ -13,8 +13,8 @@ Create a new empty package.
 ## SYNTAX
 
 ```
-New-ChocoPackage [-Name] <String> [[-OutputDir] <String>] [[-Version] <String>] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+New-ChocoPackage [-Name] <String> [[-OutputDir] <String>] [[-Version] <String>]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,6 +61,21 @@ Aliases:
 Required: False
 Position: 2
 Default value: "$PWD"
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

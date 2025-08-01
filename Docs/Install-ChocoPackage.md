@@ -16,7 +16,7 @@ Just like Chocolatey, you may need admin rights to install a package.
 
 ```
 Install-ChocoPackage [-Name] <String[]> [-Source <String>] [-Upgrade] [-Force] [-PreRelease]
- [-AskForConfirmation] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-AskForConfirmation] [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,36 +29,32 @@ Just like Chocolatey, you may need admin rights to install a package.
 ### EXAMPLE 1
 ```
 Install-ChocoPackage -Name rufus
-```
-
 Name  Version Status
 ----  ------- ------
 rufus 4.2.0   Installed
+```
 
 ### EXAMPLE 2
 ```
 Install-ChocoPackage -Name rufus -Source chocolatey
-```
-
 Name  Version Status
 ----  ------- ------
 rufus 4.2.0   Installed
+```
 
 ### EXAMPLE 3
 ```
 Install-ChocoPackage -Name rufus -Source chocolatey -Upgrade
-```
-
 Name  Version Status
 ----  ------- ------
 rufus 4.2.0   Installed
+```
 
 ### EXAMPLE 4
 ```
 Install-ChocoPackage -Name rufus -WhatIf
-```
-
 What if: Performing the operation "Install-ChocoPackage" on target "rufus".
+```
 
 Name  Version Status
 ----  ------- ------
@@ -123,6 +119,21 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

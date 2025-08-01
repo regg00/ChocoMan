@@ -14,8 +14,8 @@ Doesn't asks for confirmation by default.
 ## SYNTAX
 
 ```
-Uninstall-ChocoPackage [-Name] <String[]> [-Force] [-AskForConfirmation] [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Uninstall-ChocoPackage [-Name] <String[]> [-Force] [-AskForConfirmation] [-ProgressAction <ActionPreference>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,45 +29,40 @@ This function also accepts pipeline input.
 ### EXAMPLE 1
 ```
 Uninstall-ChocoPackage -Name rufus
-```
-
 Name  Version Status
 ----  ------- ------
 rufus 4.2.0   Uninstalled
+```
 
 ### EXAMPLE 2
 ```
 Uninstall-ChocoPackage -Name rufus -Force
-```
-
 Name  Version Status
 ----  ------- ------
 rufus 4.2.0   Uninstalled
+```
 
 ### EXAMPLE 3
 ```
 Uninstall-ChocoPackage -Name rufus -AskForConfirmation
-```
-
 Name  Version Status
 ----  ------- ------
 rufus 4.2.0   Uninstalled
+```
 
 ### EXAMPLE 4
 ```
 Get-ChocoPackage -Name rufus | Uninstall-ChocoPackage
-```
-
 Name  Version Status
 ----  ------- ------
 rufus 4.2.0   Uninstalled
+```
 
 ### EXAMPLE 5
 ```
 Uninstall-ChocoPackage -Name rufus -WhatIf
-```
-
 What if: Performing the operation "Uninstall-ChocoPackage" on target "rufus".
+```
 
 Name  Version Status
 ----  ------- ------
@@ -118,6 +113,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

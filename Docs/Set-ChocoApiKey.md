@@ -13,7 +13,8 @@ Sets an api key for a particular source so it doesn't need to be specified every
 ## SYNTAX
 
 ```
-Set-ChocoApiKey [-Source] <String> [-ApiKey] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+Set-ChocoApiKey [-Source] <String> [-ApiKey] <String> [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,11 +25,10 @@ Sets an api key for a particular source so it doesn't need to be specified every
 ### EXAMPLE 1
 ```
 Set-ChocoApiKey -Source https://chocolatey.org -ApiKey 1234
-```
-
 Source             Status          ApiKey
 ------             ------          ------
 https://google.com Updated API key *****************
+```
 
 ## PARAMETERS
 
@@ -42,6 +42,21 @@ Aliases:
 
 Required: True
 Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
