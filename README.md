@@ -74,16 +74,16 @@ Here's the status of each functions:
 | [Set-ChocoApiKey](./Docs/Set-ChocoApikey.md)               | :white_check_mark: | Edit API keys                                                                      |
 | [Set-ChocoConfig](./Docs/Set-ChocoConfig.md)                                            | :white_check_mark: | Edit chocolatey configuration                                                      |
 | [Search-ChocoPackage](./Docs/Search-ChocoPackage.md)       | :white_check_mark: | Search for a chocolatey package.                                                   |
-| [Add-ChocoApiKey](./Docs/Set-ChocoApiKey.md)               | :white_check_mark: | Adds a new API. Aliases to Set-ChocoApiKey. keuy                                   |
+| [Add-ChocoApiKey](./Docs/Set-ChocoApiKey.md)               | :white_check_mark: | Adds a new API. Aliases to Set-ChocoApiKey.                                        |
 | [Add-ChocoSource ](./Docs/Add-ChocoSource.md)              | :white_check_mark: | Adds a new chocolatey source                                                       |
 | [Install-Choco](./Docs/Install-Choco.md)                   | :white_check_mark: | Install chocolatey.                                                                |
 | [Install-ChocoPackage](./Docs/Install-ChocoPackage.md)     | :white_check_mark: | Installs a chocolatey package.                                                     |
 | [Uninstall-ChocoPackage](./Docs/Uninstall-ChocoPackage.md) | :white_check_mark: | Uninstalls a chocolatey package.                                                   |
 | [Update-ChocoPackage](./Docs/Update-ChocoPackage.md)       | :white_check_mark: | Updates a chocolatey package.                                                      |
-| [Remove-ChocoSource ](./Docs/Remove-ChocoSource.md)        | :white_check_mark: | Removes a chocolatey source                                                        |
-| [New-ChocoPackage ](./Docs/New-ChocoPackage.md)            | :white_check_mark: | Generates files necessary for a chocolatey package from a template                 |
-| Build-ChocoPackage                                         | :soon:             | Packages nuspec, scripts, and other Chocolatey package resources into a nupkg file |
-| Publish-ChocoPackage                                       | :soon:             | Pushes a compiled nupkg to a source                                                |
+| [Remove-ChocoSource ](./Docs/Remove-ChocoSource.md)        | :white_check_mark: | Removes a chocolatey source.                                                        |
+| [New-ChocoPackage ](./Docs/New-ChocoPackage.md)            | :white_check_mark: | Generates files necessary for a chocolatey package from a template.                 |
+| [Export-ChocoPackage ](./Docs/Export-ChocoPackage.md)      | :white_check_mark: | Packages nuspec, scripts, and other Chocolatey package resources into a nupkg file. |
+| Publish-ChocoPackage                                       | :soon:             | Pushes a compiled nupkg to a source.                                                |
 
 
 ## What else can I do?
