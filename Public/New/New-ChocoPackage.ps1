@@ -1,20 +1,19 @@
-Function Add-ChocoSource {
+Function New-ChocoPackage {
     <#
     .SYNOPSIS
-        Add a new chocolatey source.
+        Create a new empty package.
     .DESCRIPTION
-        Add a new chocolatey source.
+        Create a new empty package.
     .PARAMETER Name
-        The name of the source.
-    .PARAMETER Uri
-        The Uri of the source.
-    .PARAMETER Credential
-        The credential to use to access the source.
-    .PARAMETER Priority
-        The priority of the source.
+        The name of the package to create.
+    .PARAMETER OutputDir
+        The local path where the package files will be created. Defaults to current directory.
+    .PARAMETER Version
+        The version of the package to create. Defaults to 1.0.0.
     .EXAMPLE
-        Add-ChocoSource -Name test -Url https://test.com -Priority 10        
-
+        New-ChocoPackage -Name test        
+    .EXAMPLE
+        New-ChocoPackage -Name test -OutputDir C:\test -Version 2.0.0       
     .OUTPUTS
         PSCustomObject
     #>
@@ -24,23 +23,19 @@ Function Add-ChocoSource {
         [Parameter(Mandatory = $true)]
         [String] $Name,
 
-        [Parameter(Mandatory = $true)]
-        [String] $Uri,
-        
         [Parameter(Mandatory = $false)]
-        [Int16] $Priority = 0,
+        [String] $OutputDir = "$PWD",               
 
-        [PSCredential] $Credential
+        [Parameter(Mandatory = $false)]
+        [String] $Version = '1.0.0'
+
+        
     )
     begin {
         if ((Test-ChocoInstalled) -And (Confirm-IsAdmin)) {
 
-            [String[]]$Arguments = "source", "add", "-s=""$Uri""", "-n=$Name", "--priority=$Priority"
-
-            if ($Credential) {
-                $Arguments += "-u=$($Credential.GetNetworkCredential().UserName)"
-                $Arguments += "-p=$($Credential.GetNetworkCredential().Password)"
-            }
+            [String[]]$Arguments = "new", "-n=$Name", "--version=$Version", "--out=$OutputDir"
+            
         }
     }
     process {
@@ -50,19 +45,16 @@ Function Add-ChocoSource {
 
                 $CommandOutput = Invoke-ChocoCommand $Arguments
 
-                if ($CommandOutput.RawOutput -like "Added*") {
-                    $Status = "Added"
+                if ($CommandOutput.RawOutput -like "Successfully generated*") {
+                    $Status = "Created"
                 }
-                elseif ($CommandOutput.RawOutput -like "Updated*") {
-                    $Status = "Updated"
-                }
-                elseif ($CommandOutput.RawOutput -like "Nothing to change*") {
-                    $Status = "Nothing to change"
-                }
+                elseif ($CommandOutput.RawOutput -like "The location for the template already exists.*") {
+                    $Status = "Directory already exists."
+                }                
 
                 Return [PSCustomObject]@{
                     Name   = $Name
-                    Uri    = $Uri
+                    OutputDir = Join-Path -Path $OutputDir -ChildPath $Name
                     Status = $Status
                 }
             }
@@ -76,7 +68,7 @@ Function Add-ChocoSource {
 
                 Return [PSCustomObject]@{
                     Name   = $Name
-                    Uri    = $Uri
+                    OutputDir = Join-Path -Path $OutputDir -ChildPath $Name
                     Status = $Status
                 }
             }
