@@ -13,8 +13,8 @@ Add a new chocolatey source.
 ## SYNTAX
 
 ```
-Add-ChocoSource [-Name] <String> [-Uri] <String> [[-Priority] <Int16>] [[-Credential] <PSCredential>]
- [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Add-ChocoSource [-Name] <String> [-Uri] <String> [[-Priority] <Int16>] [[-Credential] <PSCredential>] [-WhatIf]
+ [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,21 +70,6 @@ Aliases:
 Required: False
 Position: 3
 Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

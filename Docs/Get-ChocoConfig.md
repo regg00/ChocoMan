@@ -13,7 +13,7 @@ Retrieves the Chocolatey configuration
 ## SYNTAX
 
 ```
-Get-ChocoConfig [[-Name] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-ChocoConfig [[-Name] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,20 +24,26 @@ Retrieves the Chocolatey configuration
 ### EXAMPLE 1
 ```
 Get-ChocoConfig
+```
+
 Name                                                      Value                             Description
 ---                                                       -----                             -----------
-cacheLocation                                                                               Cache location if not TEMP folder. Replaces `$env:TEMP` value for choco.exe pro…
+cacheLocation                                                                               Cache location if not TEMP folder.
+Replaces \`$env:TEMP\` value for choco.exe proâ€¦
 containsLegacyPackageInstalls                             true                              Install has packages installed prior to 0.9.9 series.
-commandExecutionTimeoutSeconds                            2700                              Default timeout for command execution. '0' for infinite.
-```
+commandExecutionTimeoutSeconds                            2700                              Default timeout for command execution.
+'0' for infinite.
 
 ### EXAMPLE 2
 ```
 Get-ChocoConfig -Name cacheLocation
+```
+
 Name          Value Description
 ----          ----- -----------
-cacheLocation       Cache location if not TEMP folder. Replaces `$env:TEMP` value for choco.exe process. It is highly recommended
-```
+cacheLocation       Cache location if not TEMP folder.
+Replaces \`$env:TEMP\` value for choco.exe process.
+It is highly recommended
 
 ## PARAMETERS
 
@@ -51,21 +57,6 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

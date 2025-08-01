@@ -14,8 +14,7 @@ If no name is specified this will return all available packages.
 ## SYNTAX
 
 ```
-Search-ChocoPackage [[-Name] <String>] [-Source <String>] [-Exact] [-PreRelease]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Search-ChocoPackage [[-Name] <String>] [-Source <String>] [-Exact] [-PreRelease] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,43 +26,49 @@ If no name is specified this will return all available packages.
 ### EXAMPLE 1
 ```
 Search-ChocoPackage -Name "rufus"
+```
+
 Name                Version
 ----                -------
 rufus                 3.0.18
 rufus.install         3.0.18
 rufus.portable        3.0.18
 rufus-nightly         4.0.0.20230713
-```
 
 ### EXAMPLE 2
 ```
 Search-ChocoPackage -Name "rufus" -Source "chocolatey"
+```
+
 Name                Version
 ----                -------
 rufus                 3.0.18
 rufus.install         3.0.18
 rufus.portable        3.0.18
 rufus-nightly         4.0.0.20230713
-```
 
 ### EXAMPLE 3
 ```
 Search-ChocoPackage -Name "rufus" -Source "chocolatey" -Exact
+```
+
 Name Version
 ---- -------
 rufus  3.0.18
-```
 
 ### EXAMPLE 4
 ```
 Search-ChocoPackage
+```
+
 Name                Version
 ----                -------
 rufus                 3.0.18
 rufus.install         3.0.18
-...                 ...
-...                 ...
-```
+... 
+...
+... 
+...
 
 ## PARAMETERS
 
@@ -109,21 +114,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
