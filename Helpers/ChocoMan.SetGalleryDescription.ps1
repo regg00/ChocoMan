@@ -1,7 +1,8 @@
 # Parameters
 $manifestPath = ".\ChocoMan.psd1"  # Path to your module manifest
 $readmeUrl = "https://raw.githubusercontent.com/regg00/ChocoMan/refs/heads/main/README.md"
-$iconUrl = "https://raw.githubusercontent.com/regg00/ChocoMan/refs/heads/main/Docs/icon.png"
+$iconUrl = 'https://raw.githubusercontent.com/regg00/ChocoMan/main/Docs/icon.png'
+
 
 # Get README content from GitHub
 try {
@@ -20,6 +21,6 @@ if ($readmeText.Length -gt $maxLength) {
 # Update the manifest
 Update-ModuleManifest -Path $manifestPath `
     -Description $readmeText `
-    -IconUri $iconUrl
+    -IconUri $iconUrl -ModuleVersion '1.3.6'
 
 Write-Host "Module manifest updated successfully."
